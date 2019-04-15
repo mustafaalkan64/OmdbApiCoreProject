@@ -50,6 +50,7 @@ namespace OmdbApi.Api.Controllers
             {
                 string key = $"?title={title}&year={year}";
                 string obj;
+                // Check Cache 
                 if (!_cache.TryGetValue(key, out obj))
                 {
                     // Set cache options.
@@ -60,13 +61,16 @@ namespace OmdbApi.Api.Controllers
                     var resultFromDb = await _movieService.GetFromDb(title, year);
                     if (resultFromDb == null)
                     {
+                        // Get Movie Data From Omdb Api
                         var result = await _movieService.GetFromOmdbApi(title, year);
                         var response = Convert.ToBoolean(result.Response);
                         if (response)
                         {
+                            // Add Movie
                             await _movieService.AddMovie(result);
                             int movieId = result.Id;
 
+                            // Add Ratings That Belong The Movie
                             var ratings = result.Ratings;
                             foreach (var rating in ratings.ToList())
                             {
@@ -74,13 +78,17 @@ namespace OmdbApi.Api.Controllers
                                 await _movieService.AddRating(rating);
                             }
                             await _movieService.Commit();
+
+                            // Set Cache With Object That Comes Omdb Api
+                            obj = JsonConvert.SerializeObject(result);
+                            _cache.Set(key, obj, cacheEntryOptions);
+                            return Ok(result);
                         }
-                        obj = JsonConvert.SerializeObject(result);
-                        _cache.Set(key, obj, cacheEntryOptions);
-                        return Ok(result);
+                        return NotFound(result.Response);
                     }
                     else
                     {
+                        // Set Cache With Object That Comes From Db
                         obj = JsonConvert.SerializeObject(resultFromDb);
                         _cache.Set(key, obj, cacheEntryOptions);
                         return Ok(resultFromDb);
@@ -88,12 +96,12 @@ namespace OmdbApi.Api.Controllers
                 }
                 else
                 {
+                    // Get From Cache With Key
                     string _cachedData = _cache.Get<string>(key);
                     var model = JsonConvert.DeserializeObject<MovieResponse>(_cachedData);
                     return Ok(model);
                 }
 
-                
             }
             catch (Exception e)
             {
