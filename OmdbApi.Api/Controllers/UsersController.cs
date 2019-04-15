@@ -21,11 +21,11 @@ namespace OmdbApi.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Authenticate([FromBody]User userParam)
+        public async Task<IActionResult> Authenticate(string userName, string password)
         {
             try
             {
-                var user = await _userService.Authenticate(userParam.Username, userParam.Password);
+                var user = await _userService.Authenticate(userName, password);
 
                 if (user == null)
                     return BadRequest(new { message = "Username or password is incorrect" });

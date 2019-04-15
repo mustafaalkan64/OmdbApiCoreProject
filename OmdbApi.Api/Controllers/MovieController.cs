@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
@@ -11,6 +12,7 @@ using OmdbApi.DAL.Services.Interfaces;
 
 namespace OmdbApi.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MovieController : ControllerBase
@@ -72,7 +74,7 @@ namespace OmdbApi.Api.Controllers
 
                             // Add Ratings That Belong The Movie
                             var ratings = result.Ratings;
-                            foreach (var rating in ratings.ToList())
+                            foreach (var rating in ratings)
                             {
                                 rating.MovieId = movieId;
                                 await _movieService.AddRating(rating);
