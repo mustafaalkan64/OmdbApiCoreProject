@@ -51,6 +51,7 @@ namespace OmdbApi.Api
 
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();
+            var secret = appSettings.Secret;
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>
             {
@@ -86,13 +87,18 @@ namespace OmdbApi.Api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-                c.AddSecurityDefinition("oauth2", new ApiKeyScheme
+                var security = new Dictionary<string, IEnumerable<string>>
                 {
-                    Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
-                    In = "header",
+                    {"Bearer", new string[] { }},
+                };
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                     Name = "Authorization",
+                    In = "header",
                     Type = "apiKey"
                 });
+                c.AddSecurityRequirement(security);
             });
         }
 

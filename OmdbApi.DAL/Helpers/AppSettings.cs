@@ -1,4 +1,6 @@
-﻿namespace OmdbApi.DAL.Helpers
+﻿using Microsoft.Extensions.Configuration;
+
+namespace OmdbApi.DAL.Helpers
 {
     public class AppSettings
     {

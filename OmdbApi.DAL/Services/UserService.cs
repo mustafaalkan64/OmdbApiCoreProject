@@ -68,7 +68,8 @@ namespace OmdbApi.DAL.Services
                     new Claim("UserId", user.Id.ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AppSettings:Secret")));
+            var secretkey = _configuration.GetValue<string>("AppSettings:Secret");
+            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretkey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
