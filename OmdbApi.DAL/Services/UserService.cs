@@ -31,20 +31,26 @@ namespace OmdbApi.DAL.Services
             if (user == null)
                 return null;
 
-            // authentication successful so generate jwt token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AppSettings:Secret"));
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
+            var claims = new[]
+                 {
+                        new Claim(JwtRegisteredClaimNames.Sub, user.Username?.ToString() ?? ""),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString() ?? ""),
+                        new Claim(JwtRegisteredClaimNames.Email, user.Email?.ToString() ?? ""),
+                        new Claim("UserId", user.Id.ToString())
+                };
+
+            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AppSettings:Secret")));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: "https://github.com/mustafaalkan64/OmdbApiCoreProject",
+                audience: "https://github.com/mustafaalkan64/OmdbApiCoreProject",
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: creds);
+
+            var usertoken = new JwtSecurityTokenHandler().WriteToken(token);
+            user.Token = usertoken;
 
             // remove password before returning
             user.Password = null;
@@ -60,25 +66,30 @@ namespace OmdbApi.DAL.Services
                 if (user == null)
                     return null;
 
+                var claims = new[]
+                {
+                        new Claim(JwtRegisteredClaimNames.Sub, user.Username),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Email, user.Email)
+                };
+
+                var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AppSettings:Secret")));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                var token = new JwtSecurityToken(
+                    issuer: "https://github.com/mustafaalkan64/OmdbApiCoreProject",
+                    audience: "https://github.com/mustafaalkan64/OmdbApiCoreProject",
+                    claims: claims,
+                    expires: DateTime.Now.AddMinutes(30),
+                    signingCredentials: creds);
+
+                var usertoken = new JwtSecurityTokenHandler().WriteToken(token);
+                user.Token = usertoken;
 
                 if (await _uow.UserRepository.Add(user))
                 {
                     await _uow.Commit();
-                    // authentication successful so generate jwt token
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var key = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AppSettings:Secret"));
-                    var tokenDescriptor = new SecurityTokenDescriptor
-                    {
-                        Subject = new ClaimsIdentity(new Claim[]
-                        {
-                            new Claim(ClaimTypes.Name, user.Id.ToString())
-                        }),
-                        Expires = DateTime.UtcNow.AddDays(7),
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-                    };
-                    var token = tokenHandler.CreateToken(tokenDescriptor);
-                    user.Token = tokenHandler.WriteToken(token);
-                    return user.Token;
+                    return usertoken;
                 }
                 else
                     return string.Empty;

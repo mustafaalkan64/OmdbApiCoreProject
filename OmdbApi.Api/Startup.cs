@@ -20,6 +20,7 @@ using OmdbApi.DAL.Services.Interfaces;
 using OmdbApi.DAL.Uow;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
+using Newtonsoft.Json.Serialization;
 
 namespace OmdbApi.Api
 {
@@ -68,6 +69,10 @@ namespace OmdbApi.Api
                     ValidateAudience = false
                 };
             });
+
+            services.AddMvcCore()
+                .AddAuthorization() // Note - this is on the IMvcBuilder, not the service collection
+                .AddJsonFormatters(options => options.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
             services.AddHangfire(_ => _.UseSqlServerStorage(Configuration.GetValue<string>("HangfireDbConn")));
 
