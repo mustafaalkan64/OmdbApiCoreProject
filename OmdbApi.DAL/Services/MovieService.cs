@@ -4,6 +4,7 @@ using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Services.Interfaces;
 using OmdbApi.DAL.Uow;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -27,7 +28,17 @@ namespace OmdbApi.DAL.Services
             await _uow.Commit();
         }
 
-        public async Task<MovieResponse> GetFromOmdb(string title, int? year)
+        public async Task AddRating(Rating rating)
+        {
+            await _uow.RatingRepository.Add(rating);
+        }
+
+        public async Task Commit()
+        {
+            await _uow.Commit();
+        }
+
+        public async Task<MovieResponse> GetFromOmdbApi(string title, int? year)
         {
             var apikey = _configuration.GetValue<string>("omdbapikey");
             string URL = "http://www.omdbapi.com/";
@@ -58,6 +69,11 @@ namespace OmdbApi.DAL.Services
                 }
             }
                 
+        }
+
+        public async Task<Movie> GetFromDb(string title, int? year)
+        {
+            return await _uow.MovieRepository.FindBy((x => x.Title.Contains(title) || x.Year == year.ToString()), a => a.Ratings);
         }
     }
 }

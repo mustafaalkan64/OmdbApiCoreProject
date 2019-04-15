@@ -10,6 +10,7 @@ namespace OmdbApi.DAL.Uow
         private readonly OmdApiDbContext _context;
         private IGenericRepository<Movie> _movieRepository;
         private IGenericRepository<User> _userRepository;
+        private IGenericRepository<Rating> _ratingRepository;
 
         public UnitOfWork(OmdApiDbContext context)
         {
@@ -24,6 +25,11 @@ namespace OmdbApi.DAL.Uow
         public IGenericRepository<User> UserRepository
         {
             get { return _userRepository ?? (_userRepository = new GenericRepository<User>(_context)); }
+        }
+
+        public IGenericRepository<Rating> RatingRepository
+        {
+            get { return _ratingRepository ?? (_ratingRepository = new GenericRepository<Rating>(_context)); }
         }
 
         public async Task Commit()

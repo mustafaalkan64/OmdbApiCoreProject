@@ -9,6 +9,7 @@ namespace OmdbApi.DAL.Uow
     {
         IGenericRepository<Movie> MovieRepository { get; }
         IGenericRepository<User> UserRepository { get; }
+        IGenericRepository<Rating> RatingRepository { get;}
         Task Commit();
     }
 }

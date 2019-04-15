@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using OmdbApi.DAL.Entities;
+using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Services.Interfaces;
 
 namespace OmdbApi.Api.Controllers
@@ -65,17 +66,33 @@ namespace OmdbApi.Api.Controllers
 
         }
 
-        [HttpGet("GetFromOmdbApi")]
-        public async Task<IActionResult> GetFromOmdbApi(string title, int? year)
+        [HttpGet("SearchMovie")]
+        public async Task<IActionResult> SearchMovie(string title, int? year)
         {
             try
             {
-                var result = await _movieService.GetFromOmdb(title, year);
-                var response = Convert.ToBoolean(result.Response);
-                if (response)
+                var resultFromDb = await _movieService.GetFromDb(title, year);
+                if(resultFromDb == null)
+                {
+                    var result = await _movieService.GetFromOmdbApi(title, year);
+                    var response = Convert.ToBoolean(result.Response);
+                    if (response)
+                    {
+                        await _movieService.AddMovie(result);
+                        int movieId = result.Id;
+
+                        var ratings = result.Ratings;
+                        foreach (var rating in ratings.ToList())
+                        {
+                            rating.MovieId = movieId;
+                            await _movieService.AddRating(rating);
+                        }
+                        await _movieService.Commit();
+                    }
                     return Ok(result);
+                }
                 else
-                    return NotFound(result.Error);
+                    return Ok(resultFromDb);
             }
             catch (Exception e)
             {
