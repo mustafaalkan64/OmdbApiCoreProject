@@ -29,7 +29,7 @@ namespace OmdbApi.Api.Controllers
         }
 
         [HttpGet("Clear")]
-        public void Clear()
+        public async Task<IActionResult> Clear()
         {
             try
             {
@@ -37,6 +37,8 @@ namespace OmdbApi.Api.Controllers
                 object innerCache = prop.GetValue(_cache);
                 MethodInfo clearMethod = innerCache.GetType().GetMethod("Clear", BindingFlags.Instance | BindingFlags.Public);
                 clearMethod.Invoke(innerCache, null);
+                _logger.LogInformation("All Keys Removed From Cache");
+                return Ok();
             }
             catch (Exception e)
             {
