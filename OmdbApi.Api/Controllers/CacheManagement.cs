@@ -29,7 +29,7 @@ namespace OmdbApi.Api.Controllers
         }
 
         [HttpGet("Clear")]
-        public async Task<IActionResult> Clear()
+        public IActionResult Clear()
         {
             try
             {
