@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using OmdbApi.DAL.Entities;
 using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Services.Interfaces;
@@ -23,29 +23,6 @@ namespace OmdbApi.Api.Controllers
             _movieService = movieService;
             _logger = logger;
             _cache = cache;
-        }
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            try
-            {
-                _logger.LogInformation("Could break here :(");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "It broke :(");
-                throw e;
-            }
-
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
         }
 
         // POST api/values
@@ -71,28 +48,52 @@ namespace OmdbApi.Api.Controllers
         {
             try
             {
-                var resultFromDb = await _movieService.GetFromDb(title, year);
-                if(resultFromDb == null)
+                string key = $"?title={title}&year={year}";
+                string obj;
+                if (!_cache.TryGetValue(key, out obj))
                 {
-                    var result = await _movieService.GetFromOmdbApi(title, year);
-                    var response = Convert.ToBoolean(result.Response);
-                    if (response)
-                    {
-                        await _movieService.AddMovie(result);
-                        int movieId = result.Id;
+                    // Set cache options.
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        // Keep in cache for this time, reset time if accessed.
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(12));
 
-                        var ratings = result.Ratings;
-                        foreach (var rating in ratings.ToList())
+                    var resultFromDb = await _movieService.GetFromDb(title, year);
+                    if (resultFromDb == null)
+                    {
+                        var result = await _movieService.GetFromOmdbApi(title, year);
+                        var response = Convert.ToBoolean(result.Response);
+                        if (response)
                         {
-                            rating.MovieId = movieId;
-                            await _movieService.AddRating(rating);
+                            await _movieService.AddMovie(result);
+                            int movieId = result.Id;
+
+                            var ratings = result.Ratings;
+                            foreach (var rating in ratings.ToList())
+                            {
+                                rating.MovieId = movieId;
+                                await _movieService.AddRating(rating);
+                            }
+                            await _movieService.Commit();
                         }
-                        await _movieService.Commit();
+                        obj = JsonConvert.SerializeObject(result);
+                        _cache.Set(key, obj, cacheEntryOptions);
+                        return Ok(result);
                     }
-                    return Ok(result);
+                    else
+                    {
+                        obj = JsonConvert.SerializeObject(resultFromDb);
+                        _cache.Set(key, obj, cacheEntryOptions);
+                        return Ok(resultFromDb);
+                    }
                 }
                 else
-                    return Ok(resultFromDb);
+                {
+                    string _cachedData = _cache.Get<string>(key);
+                    var model = JsonConvert.DeserializeObject<MovieResponse>(_cachedData);
+                    return Ok(model);
+                }
+
+                
             }
             catch (Exception e)
             {
