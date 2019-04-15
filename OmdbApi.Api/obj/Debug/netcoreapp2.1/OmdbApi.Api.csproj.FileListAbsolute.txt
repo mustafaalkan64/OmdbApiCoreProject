@@ -1,0 +1,58 @@
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.deps.json
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.runtimeconfig.json
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.runtimeconfig.dev.json
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.dll
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.pdb
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.DAL.dll
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.DAL.pdb
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.csprojAssemblyReference.cache
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.csproj.CoreCompileInputs.cache
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.RazorAssemblyInfo.cache
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.RazorAssemblyInfo.cs
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.AssemblyInfoInputs.cache
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.AssemblyInfo.cs
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.RazorTargetAssemblyInfo.cache
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.csproj.CopyComplete
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.dll
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.pdb
+C:\Users\Mustafa ALKAN\source\repos\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.deps.json
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.runtimeconfig.json
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.runtimeconfig.dev.json
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.dll
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.pdb
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.csprojAssemblyReference.cache
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.csproj.CoreCompileInputs.cache
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.RazorAssemblyInfo.cache
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.RazorAssemblyInfo.cs
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.AssemblyInfoInputs.cache
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.AssemblyInfo.cs
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.RazorTargetAssemblyInfo.cache
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.csproj.CopyComplete
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.dll
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.pdb
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.DAL.Views.dll
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.DAL.Views.pdb
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.DAL.dll
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.DAL.pdb
+C:\DotNetCoreWorkOuts\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.DAL.Views.dll
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.DAL.Views.pdb
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.deps.json
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.runtimeconfig.json
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.runtimeconfig.dev.json
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.dll
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.pdb
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.DAL.dll
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.DAL.pdb
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.csprojAssemblyReference.cache
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.RazorAssemblyInfo.cache
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.RazorAssemblyInfo.cs
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.AssemblyInfo.cs
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.RazorTargetAssemblyInfo.cache
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.csproj.CopyComplete
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.dll
+C:\Users\user\Desktop\OmdbApiProject\OmdbApiProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.pdb
