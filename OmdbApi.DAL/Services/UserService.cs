@@ -23,21 +23,50 @@ namespace OmdbApi.DAL.Services
             _configuration = configuration;
         }
 
-        public async Task<User> Authenticate(string username, string password)
+        public async Task<string> Authenticate(string username, string password)
         {
             var user = await _uow.UserRepository.FindBy(x => x.Username == username && x.Password == password);
 
             // return null if user not found
             if (user == null)
-                return null;
+                return string.Empty;
 
+            var token = CreateToken(user);
+            return token;
+        }
+
+        public async Task<string> Register(User user)
+        {
+            try
+            {
+                // return null if user not found
+                if (user == null)
+                    return null;
+
+                // Register
+                await _uow.UserRepository.Add(user);
+                await _uow.Commit();
+
+                // Get Token
+                var token = CreateToken(user);
+                return token;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        private string CreateToken(User user)
+        {
             var claims = new[]
-                 {
-                        new Claim(JwtRegisteredClaimNames.Sub, user.Username?.ToString() ?? ""),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString() ?? ""),
-                        new Claim(JwtRegisteredClaimNames.Email, user.Email?.ToString() ?? ""),
-                        new Claim("UserId", user.Id.ToString())
-                };
+            {
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Username?.ToString() ?? ""),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString() ?? ""),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email?.ToString() ?? ""),
+                    new Claim("UserId", user.Id.ToString())
+            };
 
             var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AppSettings:Secret")));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -50,55 +79,7 @@ namespace OmdbApi.DAL.Services
                 signingCredentials: creds);
 
             var usertoken = new JwtSecurityTokenHandler().WriteToken(token);
-            user.Token = usertoken;
-
-            // remove password before returning
-            user.Password = null;
-
-            return user;
-        }
-
-        public async Task<string> Register(User user)
-        {
-            try
-            {
-                // return null if user not found
-                if (user == null)
-                    return null;
-
-                var claims = new[]
-                {
-                        new Claim(JwtRegisteredClaimNames.Sub, user.Username),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Email, user.Email)
-                };
-
-                var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AppSettings:Secret")));
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-                var token = new JwtSecurityToken(
-                    issuer: "https://github.com/mustafaalkan64/OmdbApiCoreProject",
-                    audience: "https://github.com/mustafaalkan64/OmdbApiCoreProject",
-                    claims: claims,
-                    expires: DateTime.Now.AddMinutes(30),
-                    signingCredentials: creds);
-
-                var usertoken = new JwtSecurityTokenHandler().WriteToken(token);
-                user.Token = usertoken;
-
-                if (await _uow.UserRepository.Add(user))
-                {
-                    await _uow.Commit();
-                    return usertoken;
-                }
-                else
-                    return string.Empty;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            
+            return usertoken;
         }
     }
 }

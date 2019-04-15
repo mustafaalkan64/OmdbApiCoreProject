@@ -25,12 +25,12 @@ namespace OmdbApi.Api.Controllers
         {
             try
             {
-                var user = await _userService.Authenticate(userName, password);
+                var token = await _userService.Authenticate(userName, password);
 
-                if (user == null)
+                if (string.IsNullOrEmpty(token))
                     return BadRequest(new { message = "Username or password is incorrect" });
 
-                return Ok(user.Token);
+                return Ok(token);
             }
             catch (Exception ex)
             {
