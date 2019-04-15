@@ -20,15 +20,5 @@ namespace OmdbApi.DAL
         {
             base.OnModelCreating(builder);
         }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    var configuration = new ConfigurationBuilder()
-        //       .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-        //       .AddJsonFile("appsettings.json")
-        //       .Build();
-        //    //optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-        //    optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-        //}
     }
 }
