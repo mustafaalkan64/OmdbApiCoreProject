@@ -111,5 +111,19 @@ namespace OmdbApi.Api.Controllers
                 throw e;
             }
         }
+
+        [HttpPut("UpdateAllMovies")]
+        public async Task UpdateAllMovies()
+        {
+            try
+            {
+                await _movieService.UpdateAllMovies();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Exception Error Updating All Movie");
+                throw e;
+            }
+        }
     }
 }

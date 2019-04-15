@@ -125,6 +125,10 @@ namespace OmdbApi.Api
             app.UseHangfireDashboard();
             app.UseHangfireServer();
 
+            // Update All Movies Per 10 Minutes..
+            RecurringJob.AddOrUpdate<IMovieService>(
+                movieService => movieService.UpdateAllMovies(), "*/10 * * * *");
+
             //app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
