@@ -104,11 +104,6 @@ namespace OmdbApi.DAL.Services
             return await _uow.MovieRepository.FindBy((x => x.Title.Contains(title) || x.Year == year.ToString()), a => a.Ratings);
         }
 
-        public async Task<Movie> GetFromDbByImdbId(string imdbId)
-        {
-            return await _uow.MovieRepository.FindBy(x => x.imdbID == imdbId);
-        }
-
         public async Task UpdateAllMovies()
         {
             try
@@ -116,18 +111,32 @@ namespace OmdbApi.DAL.Services
                 var movies = await _uow.MovieRepository.GetAll();
                 foreach (var movie in movies)
                 {
-                    var movieResult = await GetFromOmdbApiByImdbId(movie.imdbID);
-                    movieResult.Id = movie.Id;
-                    // Update Movie..
-                    await _uow.MovieRepository.Update(movieResult);
-                    var ratings = movieResult.Ratings;
+                    var movieResultFromOmdb = await GetFromOmdbApiByImdbId(movie.imdbID);
+                    movieResultFromOmdb.Id = movie.Id;
+                    
+                    // Update Movie Up to Omdb Api
+                    await _uow.MovieRepository.Update(movieResultFromOmdb);
+
+                    var ratings = movieResultFromOmdb.Ratings;
                     foreach (var rating in ratings)
                     {
                         var _rating = await _uow.RatingRepository.FindBy(a => a.Source == rating.Source && a.MovieId == movie.Id);
-                        _rating.Source = rating.Source;
-                        _rating.Value = rating.Value;
-                        // Update Ratings..
-                        await _uow.RatingRepository.Update(rating);
+                        if(_rating != null)
+                        {
+                            // Auto Mapper Will be Implemented to Map Operations..
+                            _rating.Source = rating.Source;
+                            _rating.Value = rating.Value;
+                            
+                            // Update Rating..
+                            await _uow.RatingRepository.Update(rating);
+                        }
+                        else
+                        {
+                            // Add New Rating
+                            rating.MovieId = movie.Id;
+                            await _uow.RatingRepository.Add(rating);
+                        }
+
                     }
                 }
                 await _uow.Commit();

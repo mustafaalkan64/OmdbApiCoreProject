@@ -11,7 +11,6 @@ namespace OmdbApi.DAL.Services.Interfaces
         Task<MovieResponse> GetFromOmdbApi(string title, int? year);
         Task<MovieResponse> GetFromOmdbApiByImdbId(string imdbId);
         Task<Movie> GetFromDb(string title, int? year);
-        Task<Movie> GetFromDbByImdbId(string imdbId);
         Task AddRating(Rating rating);
         Task Commit();
         Task UpdateAllMovies();
