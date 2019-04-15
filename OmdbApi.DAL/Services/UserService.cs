@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using OmdbApi.DAL.Entities;
-using OmdbApi.DAL.Helpers;
 using OmdbApi.DAL.Services.Interfaces;
 using OmdbApi.DAL.Uow;
 using System;
