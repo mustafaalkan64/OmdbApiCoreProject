@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GST.Fake.Authentication.JwtBearer;
+using Newtonsoft.Json;
 using OmdbApi.Api;
 using System;
 using System.Collections.Generic;
@@ -16,35 +17,16 @@ namespace OmdbApi.Test
         public MoviesTests(TestFixture<Startup> fixture)
         {
             Client = fixture.Client;
+            fixture.Client.SetFakeBearerToken("admin", new[] { "ROLE_ADMIN", "ROLE_GENTLEMAN" });
         }
 
         [Fact]
         public async Task TestGetStockItemsAsync()
         {
             // Arrange
-            var authenticateRequest = "/api/v1/Users/authenticate?userName=mustafa&password=mustafa";
-            var authenticateResponse = await Client.GetAsync(authenticateRequest);
-            var token = await authenticateResponse.Content.ReadAsStringAsync();
-
-            Client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-            // Arrange
-            var request = "/api/v1/Movie/SearchMovie?title=blade";
+            var request = "/api/Movie/SearchMovie?title=blade";
             // Act
             var response = await Client.GetAsync(request);
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-        }
-
-        [Fact]
-        public async Task TestGetStockItemAsync()
-        {
-            // Arrange
-            var request = "/api/v1/Warehouse/StockItem/1";
-
-            // Act
-            var response = await Client.GetAsync(request);
-
             // Assert
             response.EnsureSuccessStatusCode();
         }

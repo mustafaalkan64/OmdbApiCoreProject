@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using GST.Fake.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
@@ -89,7 +90,17 @@ namespace OmdbApi.Test
                 .ConfigureServices(InitializeServices)
                 .UseConfiguration(configurationBuilder.Build())
                 .UseEnvironment("Development")
-                .UseStartup(typeof(TStartup));
+                .UseStartup(typeof(TStartup))
+                .ConfigureServices(x =>
+                {
+                    // Here we add our new configuration
+                    x.AddAuthentication(options =>
+                    {
+                        options.DefaultScheme = FakeJwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultAuthenticateScheme = FakeJwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = FakeJwtBearerDefaults.AuthenticationScheme;
+                    }).AddFakeJwtBearer();
+                });
 
             // Create instance of test server
             Server = new TestServer(webHostBuilder);
