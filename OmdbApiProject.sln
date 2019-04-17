@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmdbApi.Web", "OmdbApi.Web\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmdbApi.Api", "OmdbApi.Api\OmdbApi.Api.csproj", "{11D26100-F8E2-4EF8-8CBE-5DE1DBEE6F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmdbApi.DAL", "OmdbApi.DAL\OmdbApi.DAL.csproj", "{61C88240-47E9-4080-95ED-3E2A2049487C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmdbApi.DAL", "OmdbApi.DAL\OmdbApi.DAL.csproj", "{61C88240-47E9-4080-95ED-3E2A2049487C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
