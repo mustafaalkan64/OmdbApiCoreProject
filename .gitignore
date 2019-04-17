@@ -3,7 +3,7 @@
 ################################################################################
 
 /OmdbApi.Api/bin/Debug/netcoreapp2.1
-/OmdbApi.Test
-/OmdbApi.DAL
-/OmdbApi.Api/obj/Debug/netcoreapp2.1
-/.vs
+/.vs/OmdbApiProject/v15/Server/sqlite3
+/.vs/config
+/OmdbApi.Test/bin/Debug/netcoreapp2.1
+/OmdbApi.Test/obj

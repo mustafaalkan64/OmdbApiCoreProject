@@ -31,7 +31,6 @@ namespace OmdbApi.Api
             Configuration = configuration;
             // Init Serilog configuration
             Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
-            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }

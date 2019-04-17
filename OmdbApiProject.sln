@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmdbApi.Api", "OmdbApi.Api\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmdbApi.DAL", "OmdbApi.DAL\OmdbApi.DAL.csproj", "{61C88240-47E9-4080-95ED-3E2A2049487C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmdbApi.Test", "OmdbApi.Test\OmdbApi.Test.csproj", "{9535C217-BD75-4FB4-A348-2AB497F3831D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{61C88240-47E9-4080-95ED-3E2A2049487C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61C88240-47E9-4080-95ED-3E2A2049487C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61C88240-47E9-4080-95ED-3E2A2049487C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9535C217-BD75-4FB4-A348-2AB497F3831D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9535C217-BD75-4FB4-A348-2AB497F3831D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9535C217-BD75-4FB4-A348-2AB497F3831D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9535C217-BD75-4FB4-A348-2AB497F3831D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
