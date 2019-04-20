@@ -34,7 +34,7 @@ namespace OmdbApi.DAL.Services
             return token;
         }
 
-        public async Task<CommonResponse> Register(User user)
+        public async Task<WebApiResponse> Register(User user)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace OmdbApi.DAL.Services
                 {
                     string allMessages = result.ToString("~");     // In this case, each message will be separated with a `~` 
 
-                    return new CommonResponse()
+                    return new WebApiResponse()
                     {
                         Response = allMessages,
                         Status = false
@@ -53,7 +53,7 @@ namespace OmdbApi.DAL.Services
 
                 if(!(await CheckUserName(user.Username)))
                 {
-                    return new CommonResponse()
+                    return new WebApiResponse()
                     {
                         Response = "This UserName Allready Exists. Please Enter Different UserName",
                         Status = false
@@ -62,7 +62,7 @@ namespace OmdbApi.DAL.Services
 
                 if (!(await CheckEmail(user.Email)))
                 {
-                    return new CommonResponse()
+                    return new WebApiResponse()
                     {
                         Response = "This Email Address Allready Exists. Please Enter Different Email Address",
                         Status = false
@@ -77,7 +77,8 @@ namespace OmdbApi.DAL.Services
                 await _uow.UserRepository.Add(user);
                 await _uow.Commit();
                 // Get Token
-                var token = JWTHelper.CreateToken(user, secretKey); return new CommonResponse()
+                var token = JWTHelper.CreateToken(user, secretKey);
+                return new WebApiResponse()
                 {
                     Response = token,
                     Status = true
