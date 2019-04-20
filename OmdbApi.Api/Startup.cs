@@ -21,6 +21,7 @@ using OmdbApi.DAL.Uow;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using Newtonsoft.Json.Serialization;
+using OmdbApi.DAL.Consts;
 
 namespace OmdbApi.Api
 {
@@ -43,15 +44,9 @@ namespace OmdbApi.Api
             services.AddMemoryCache();
 
             services.AddDbContext<OmdApiDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            // configure strongly typed settings objects
-            var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
-
-            // configure jwt authentication
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var secret = appSettings.Secret;
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            //var secret = appSettings.Secret;
+            var secret = AppSettingsParameters.Secret;
+            var key = Encoding.ASCII.GetBytes(secret);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -81,6 +76,7 @@ namespace OmdbApi.Api
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IMovieService, MovieService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICacheManagementService, CacheManagementService>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
