@@ -11,10 +11,32 @@ namespace OmdbApi.DAL.Validations
     {
         public UserValidator()
         {
-            RuleFor(u => u.FirstName).NotEmpty().MinimumLength(4).MaximumLength(32);
-            RuleFor(u => u.LastName).NotEmpty().MinimumLength(4).MaximumLength(32);
-            RuleFor(u => u.Username).NotEmpty().MinimumLength(4).MaximumLength(32);
-            RuleFor(u => u.Email).NotEmpty().MinimumLength(4).MaximumLength(128).EmailAddress();
+            RuleFor(u => u.FirstName)
+                .NotNull()
+                .NotEmpty()
+                .WithMessage("FirstName Is Required")
+                .MaximumLength(50)
+                .WithMessage("First Name Max Length Can Not Be Over 50"); 
+            RuleFor(u => u.LastName)
+                .NotNull()
+                .NotEmpty()
+                .WithMessage("LastName Is Required")
+                .MaximumLength(50)
+                .WithMessage("Last Name Max Length Can Not Be Over 50");
+            RuleFor(u => u.Username)
+                .NotNull()
+                .NotEmpty()
+                .WithMessage("UserName Is Required")
+                .MaximumLength(50)
+                .WithMessage("Last Name Max Length Can Not Be Over 50");
+            RuleFor(u => u.Email)
+                .NotNull()
+                .NotEmpty()
+                .WithMessage("Email Is Required")
+                .MaximumLength(150)
+                .WithMessage("Email Max Length Can Not Be Over 150")
+                .EmailAddress()
+                .WithMessage("Email Format Is Invalid");
         }
     }
 }

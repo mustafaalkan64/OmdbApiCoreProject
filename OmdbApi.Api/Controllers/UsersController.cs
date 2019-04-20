@@ -44,12 +44,12 @@ namespace OmdbApi.Api.Controllers
         {
             try
             {
-                var token = await _userService.Register(userParam);
+                var response = await _userService.Register(userParam);
 
-                if (string.IsNullOrEmpty(token))
-                    return BadRequest(new { message = "Register Is Failed" });
+                if (!response.Status)
+                    return BadRequest(new { message = response.Response });
 
-                return Ok(token);
+                return Ok(response.Response);
             }
             catch (Exception ex)
             {

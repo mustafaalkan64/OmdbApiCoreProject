@@ -27,6 +27,33 @@
           "lib/netstandard2.0/FluentValidation.dll": {}
         }
       },
+      "FluentValidation.AspNetCore/8.2.2": {
+        "type": "package",
+        "dependencies": {
+          "FluentValidation": "8.2.2",
+          "FluentValidation.DependencyInjectionExtensions": "8.2.2",
+          "Microsoft.AspNetCore.Mvc": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/FluentValidation.AspNetCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentValidation.AspNetCore.dll": {}
+        }
+      },
+      "FluentValidation.DependencyInjectionExtensions/8.2.2": {
+        "type": "package",
+        "dependencies": {
+          "FluentValidation": "8.2.2",
+          "Microsoft.Extensions.Dependencyinjection.Abstractions": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -4514,6 +4541,32 @@
         "lib/netstandard1.6/FluentValidation.xml",
         "lib/netstandard2.0/FluentValidation.dll",
         "lib/netstandard2.0/FluentValidation.xml"
+      ]
+    },
+    "FluentValidation.AspNetCore/8.2.2": {
+      "sha512": "isVPWrAhrsQWrp8sPKQhInrRuxmVllfsbgXA5wL+eJzxXOumoBvYsBDLgKBy5+8oOf3sWXQwGkXiWgfs3Zoisg==",
+      "type": "package",
+      "path": "fluentvalidation.aspnetcore/8.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fluentvalidation.aspnetcore.8.2.2.nupkg.sha512",
+        "fluentvalidation.aspnetcore.nuspec",
+        "lib/netstandard2.0/FluentValidation.AspNetCore.dll",
+        "lib/netstandard2.0/FluentValidation.AspNetCore.xml"
+      ]
+    },
+    "FluentValidation.DependencyInjectionExtensions/8.2.2": {
+      "sha512": "+wfTFPYN9go9PscxT69OIs230v6/IsB8ayuMp/uW2IKkzWglmrJZZMh8S72M+iW79pLD0u3rutR2PEgrxyolKQ==",
+      "type": "package",
+      "path": "fluentvalidation.dependencyinjectionextensions/8.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fluentvalidation.dependencyinjectionextensions.8.2.2.nupkg.sha512",
+        "fluentvalidation.dependencyinjectionextensions.nuspec",
+        "lib/netstandard2.0/FluentValidation.AspNetCore.xml",
+        "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.dll"
       ]
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -12154,6 +12207,7 @@
     ".NETCoreApp,Version=v2.1": [
       "AutoMapper >= 8.0.0",
       "FluentValidation >= 8.2.3",
+      "FluentValidation.AspNetCore >= 8.2.2",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.EntityFrameworkCore >= 2.1.1",
@@ -12215,6 +12269,10 @@
           "FluentValidation": {
             "target": "Package",
             "version": "[8.2.3, )"
+          },
+          "FluentValidation.AspNetCore": {
+            "target": "Package",
+            "version": "[8.2.2, )"
           },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
