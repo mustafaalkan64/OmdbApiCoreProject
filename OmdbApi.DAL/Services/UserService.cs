@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using OmdbApi.DAL.Consts;
 using OmdbApi.DAL.Entities;
+using OmdbApi.DAL.Helpers;
 using OmdbApi.DAL.Services.Interfaces;
 using OmdbApi.DAL.Uow;
 using System;
@@ -15,12 +17,12 @@ namespace OmdbApi.DAL.Services
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _uow;
-        private readonly IConfiguration _configuration;
+        private string secretKey;
 
-        public UserService(IUnitOfWork unit, IConfiguration configuration)
+        public UserService(IUnitOfWork unit)
         {
             _uow = unit;
-            _configuration = configuration;
+            secretKey = AppSettingsParameters.Secret;
         }
 
         public async Task<string> Authenticate(string username, string password)
@@ -31,7 +33,7 @@ namespace OmdbApi.DAL.Services
             if (user == null)
                 return string.Empty;
 
-            var token = CreateToken(user);
+            var token = JWTHelper.CreateToken(user, secretKey);
             return token;
         }
 
@@ -46,9 +48,8 @@ namespace OmdbApi.DAL.Services
                 // Register
                 await _uow.UserRepository.Add(user);
                 await _uow.Commit();
-
                 // Get Token
-                var token = CreateToken(user);
+                var token = JWTHelper.CreateToken(user, secretKey);
                 return token;
             }
             catch (Exception ex)
@@ -58,29 +59,5 @@ namespace OmdbApi.DAL.Services
 
         }
 
-        private string CreateToken(User user)
-        {
-            var claims = new[]
-            {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Username?.ToString() ?? ""),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString() ?? ""),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email?.ToString() ?? ""),
-                    new Claim("UserId", user.Id.ToString())
-            };
-
-            var secretkey = _configuration.GetValue<string>("AppSettings:Secret");
-            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretkey));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                issuer: "https://github.com/mustafaalkan64/OmdbApiCoreProject",
-                audience: "https://github.com/mustafaalkan64/OmdbApiCoreProject",
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
-                signingCredentials: creds);
-
-            var usertoken = new JwtSecurityTokenHandler().WriteToken(token);
-            return usertoken;
-        }
     }
 }

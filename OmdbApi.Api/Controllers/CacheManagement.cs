@@ -20,29 +20,23 @@ namespace OmdbApi.Api.Controllers
     [ApiController]
     public class CacheManagementController : ControllerBase
     {
-        private IMemoryCache _cache;
-        private readonly ILogger<CacheManagementController> _logger;
-        public CacheManagementController( IMemoryCache cache, ILogger<CacheManagementController> logger)
+        private readonly ICacheManagementService _cacheManagementService;
+
+        public CacheManagementController(ICacheManagementService cacheManagementService)
         {
-            _cache = cache;
-            _logger = logger;
+            _cacheManagementService = cacheManagementService;
         }
 
         [HttpGet("Clear")]
-        public IActionResult Clear()
+        public async Task<IActionResult> Clear()
         {
             try
             {
-                PropertyInfo prop = _cache.GetType().GetProperty("EntriesCollection", BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.NonPublic | BindingFlags.Public);
-                object innerCache = prop.GetValue(_cache);
-                MethodInfo clearMethod = innerCache.GetType().GetMethod("Clear", BindingFlags.Instance | BindingFlags.Public);
-                clearMethod.Invoke(innerCache, null);
-                _logger.LogInformation("All Keys Removed From Cache");
+                await _cacheManagementService.Clear();
                 return Ok();
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Exception Error During Clear Cache");
                 throw e;
             }
         }

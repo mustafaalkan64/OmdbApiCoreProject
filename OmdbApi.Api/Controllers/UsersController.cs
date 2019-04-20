@@ -7,7 +7,6 @@ using OmdbApi.DAL.Services.Interfaces;
 
 namespace OmdbApi.Api.Controllers
 {
-    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController : ControllerBase

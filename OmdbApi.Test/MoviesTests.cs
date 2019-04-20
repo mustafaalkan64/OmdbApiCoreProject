@@ -1,6 +1,11 @@
 ﻿using GST.Fake.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Protocols;
 using Newtonsoft.Json;
 using OmdbApi.Api;
+using OmdbApi.DAL.Consts;
+using OmdbApi.DAL.Entities;
+using OmdbApi.DAL.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -17,15 +22,26 @@ namespace OmdbApi.Test
         public MoviesTests(TestFixture<Startup> fixture)
         {
             Client = fixture.Client;
-            fixture.Client.SetFakeBearerToken("admin", new[] { "ROLE_ADMIN", "ROLE_GENTLEMAN" });
         }
 
         [Fact]
         public async Task TestGetStockItemsAsync()
         {
+            var titleParam = "blade";
             // Arrange
-            var request = "/api/Movie/SearchMovie?title=blade";
+            var request = $"/api/Movie/SearchMovie?title={titleParam}";
             // Act
+            var user = new User
+            {
+                Id = 2,
+                Username = "mustafa.alkan",
+                Email = "mustafaalkan64@gmail.com",
+                FirstName = "mustafa",
+                LastName = "Alkan"
+            };
+            var secretKey = AppSettingsParameters.Secret;
+            var token = JWTHelper.CreateToken(user, secretKey);
+            Client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
             var response = await Client.GetAsync(request);
             // Assert
             response.EnsureSuccessStatusCode();

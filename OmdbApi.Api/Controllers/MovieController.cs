@@ -6,13 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using OmdbApi.DAL.Consts;
 using OmdbApi.DAL.Entities;
 using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Services.Interfaces;
 
 namespace OmdbApi.Api.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = RoleType.User)]
     [Route("api/[controller]")]
     [ApiController]
     public class MovieController : ControllerBase
