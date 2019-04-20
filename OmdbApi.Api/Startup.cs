@@ -22,6 +22,9 @@ using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using Newtonsoft.Json.Serialization;
 using OmdbApi.DAL.Consts;
+using AutoMapper;
+using OmdbApi.DAL.Models;
+using OmdbApi.DAL.Entities;
 
 namespace OmdbApi.Api
 {
@@ -43,8 +46,9 @@ namespace OmdbApi.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMemoryCache();
 
-            services.AddDbContext<OmdApiDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //var secret = appSettings.Secret;
+            //services.AddDbContext<OmdApiDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<OmdApiDbContext>(opts => opts.UseSqlServer(AppSettingsParameters.ConnectionString));
+
             var secret = AppSettingsParameters.Secret;
             var key = Encoding.ASCII.GetBytes(secret);
             services.AddAuthentication(x =>
@@ -68,6 +72,15 @@ namespace OmdbApi.Api
             services.AddMvcCore()
                 .AddAuthorization() // Note - this is on the IMvcBuilder, not the service collection
                 .AddJsonFormatters(options => options.ContractResolver = new CamelCasePropertyNamesContractResolver());
+
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<MovieResponse, Movie>();
+                cfg.CreateMap<Movie, MovieResponse>().ForMember(x => x.Error, opt => opt.Ignore()); ;
+            });
+
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddHangfire(_ => _.UseSqlServerStorage(Configuration.GetValue<string>("HangfireDbConn")));
 

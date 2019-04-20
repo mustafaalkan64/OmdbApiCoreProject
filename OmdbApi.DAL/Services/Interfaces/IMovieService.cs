@@ -14,5 +14,6 @@ namespace OmdbApi.DAL.Services.Interfaces
         Task AddRating(Rating rating);
         Task Commit();
         Task UpdateAllMovies();
+        Task<MovieResponse> SearchMovie(string title, int? year);
     }
 }

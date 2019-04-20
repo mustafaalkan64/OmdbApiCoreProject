@@ -9,5 +9,6 @@ namespace OmdbApi.DAL.Consts
     public class AppSettingsParameters
     {
         public static string Secret = ConfigurationManager.AppSetting["AppSettings:Secret"];
+        public static string ConnectionString = ConfigurationManager.AppSetting["ConnectionStrings:DefaultConnection"];
     }
 }

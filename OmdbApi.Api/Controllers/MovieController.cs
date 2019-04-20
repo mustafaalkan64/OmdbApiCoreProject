@@ -20,12 +20,9 @@ namespace OmdbApi.Api.Controllers
     {
         private IMovieService _movieService;
         private readonly ILogger<MovieController> _logger;
-        private IMemoryCache _cache;
-        public MovieController(IMovieService movieService, ILogger<MovieController> logger, IMemoryCache cache)
+        public MovieController(IMovieService movieService)
         {
             _movieService = movieService;
-            _logger = logger;
-            _cache = cache;
         }
 
         // POST api/values
@@ -51,60 +48,10 @@ namespace OmdbApi.Api.Controllers
         {
             try
             {
-                string key = $"?title={title}&year={year}";
-                string obj;
-                // Check Cache 
-                if (!_cache.TryGetValue(key, out obj))
-                {
-                    // Set cache options.
-                    var cacheEntryOptions = new MemoryCacheEntryOptions()
-                        // Keep in cache for this time, reset time if accessed.
-                        .SetSlidingExpiration(TimeSpan.FromMinutes(12));
-
-                    var resultFromDb = await _movieService.GetFromDb(title, year);
-                    if (resultFromDb == null)
-                    {
-                        // Get Movie Data From Omdb Api
-                        var result = await _movieService.GetFromOmdbApi(title, year);
-                        var response = Convert.ToBoolean(result.Response);
-                        if (response)
-                        {
-                            // Add Movie
-                            await _movieService.AddMovie(result);
-                            int movieId = result.Id;
-
-                            // Add Ratings That Belong The Movie
-                            var ratings = result.Ratings;
-                            foreach (var rating in ratings)
-                            {
-                                rating.MovieId = movieId;
-                                await _movieService.AddRating(rating);
-                            }
-                            await _movieService.Commit();
-
-                            // Set Cache With Object That Comes Omdb Api
-                            obj = JsonConvert.SerializeObject(result);
-                            _cache.Set(key, obj, cacheEntryOptions);
-                            return Ok(result);
-                        }
-                        return NotFound(result.Response);
-                    }
-                    else
-                    {
-                        // Set Cache With Object That Comes From Db
-                        obj = JsonConvert.SerializeObject(resultFromDb);
-                        _cache.Set(key, obj, cacheEntryOptions);
-                        return Ok(resultFromDb);
-                    }
-                }
-                else
-                {
-                    // Get From Cache With Key
-                    string _cachedData = _cache.Get<string>(key);
-                    var model = JsonConvert.DeserializeObject<MovieResponse>(_cachedData);
-                    return Ok(model);
-                }
-
+                var movieResult = await _movieService.SearchMovie(title, year);
+                if (movieResult == null)
+                    return NotFound();
+                return Ok(movieResult);
             }
             catch (Exception e)
             {

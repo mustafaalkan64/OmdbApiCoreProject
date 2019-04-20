@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.1": {
+      "AutoMapper/8.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        }
+      },
       "FluentValidation/8.2.3": {
         "type": "package",
         "dependencies": {
@@ -4868,6 +4881,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
+          "AutoMapper": "8.0.0",
           "FluentValidation": "8.2.3",
           "Microsoft.EntityFrameworkCore": "2.1.1",
           "Microsoft.EntityFrameworkCore.Design": "2.1.1",
@@ -4887,6 +4901,23 @@
     }
   },
   "libraries": {
+    "AutoMapper/8.0.0": {
+      "sha512": "kcbje0Y71XkvzPn8k6OROZGOn2SKaWimon3Bu1WUTVoV5GTJVym+k+zQuKApyyFVRfk7bisumj/qUX4xIIXS+Q==",
+      "type": "package",
+      "path": "automapper/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "automapper.8.0.0.nupkg.sha512",
+        "automapper.nuspec",
+        "lib/net461/AutoMapper.dll",
+        "lib/net461/AutoMapper.pdb",
+        "lib/net461/AutoMapper.xml",
+        "lib/netstandard2.0/AutoMapper.dll",
+        "lib/netstandard2.0/AutoMapper.pdb",
+        "lib/netstandard2.0/AutoMapper.xml"
+      ]
+    },
     "FluentValidation/8.2.3": {
       "sha512": "jif5YdeNQOp62bmpfB1l4UG6VYp6aWd00fKGwNWP25s6mbGOqXzd09EtjI1woLXaOO3tqDCLFa8YI0lLrK0aWw==",
       "type": "package",

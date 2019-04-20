@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using OmdbApi.DAL.Entities;
 using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Services.Interfaces;
@@ -14,11 +18,17 @@ namespace OmdbApi.DAL.Services
     {
         private readonly IUnitOfWork _uow;
         private IConfiguration _configuration;
+        private IMemoryCache _cache;
+        private readonly ILogger<MovieService> _logger;
+        private readonly IMapper _mapper;
 
-        public MovieService(IUnitOfWork unit, IConfiguration configuration)
+        public MovieService(IUnitOfWork unit, IConfiguration configuration, IMemoryCache cache, ILogger<MovieService> logger, IMapper mapper)
         {
             _uow = unit;
             _configuration = configuration;
+            _cache = cache;
+            _logger = logger;
+            _mapper = mapper;
         }
 
         public async Task AddMovie(Movie entity)
@@ -143,6 +153,74 @@ namespace OmdbApi.DAL.Services
             }
             catch (Exception ex) { throw ex; };
             
+        }
+
+        public async Task<MovieResponse> SearchMovie(string title, int? year)
+        {
+            try
+            {
+                string key = $"?title={title}&year={year}";
+                string obj;
+                // Check Cache 
+                if (!_cache.TryGetValue(key, out obj))
+                {
+                    // Set cache options.
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        // Keep in cache for this time, reset time if accessed.
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(12));
+
+                    var resultFromDb = await GetFromDb(title, year);
+                    if (resultFromDb == null)
+                    {
+                        // Get Movie Data From Omdb Api
+                        var result = await GetFromOmdbApi(title, year);
+                        var response = Convert.ToBoolean(result.Response);
+                        if (response)
+                        {
+                            // Add Movie
+                            await AddMovie(result);
+                            int movieId = result.Id;
+
+                            // Add Ratings That Belong The Movie
+                            var ratings = result.Ratings;
+                            foreach (var rating in ratings)
+                            {
+                                rating.MovieId = movieId;
+                                await AddRating(rating);
+                            }
+                            await Commit();
+                            _logger.LogInformation("Movie Create Operation Is Succesfull", result);
+                            
+                            // Set Cache With Object That Comes Omdb Api
+                            obj = JsonConvert.SerializeObject(result);
+                            _cache.Set(key, obj, cacheEntryOptions);
+                            return result;
+                        }
+                        return null;
+                    }
+                    else
+                    {
+                        // Set Cache With Object That Comes From Db
+                        obj = JsonConvert.SerializeObject(resultFromDb);
+                        _cache.Set(key, obj, cacheEntryOptions);
+                        var movieResponse = _mapper.Map<MovieResponse>(resultFromDb);
+                        return movieResponse;
+                    }
+                }
+                else
+                {
+                    // Get From Cache With Key
+                    string _cachedData = _cache.Get<string>(key);
+                    var model = JsonConvert.DeserializeObject<MovieResponse>(_cachedData);
+                    return model;
+                }
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Exception Error Searching Any Movie", title);
+                throw e;
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using OmdbApi.DAL.Entities;
 using OmdbApi.DAL.Helpers;
+using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Repositories;
 using OmdbApi.DAL.Uow;
 
@@ -40,6 +42,7 @@ namespace OmdbApi.DAL
             });
 
             services.AddDbContext<OmdApiDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
