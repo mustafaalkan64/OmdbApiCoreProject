@@ -71,11 +71,16 @@ namespace OmdbApi.DAL.Services
 
                 // return null if user not found
                 if (user == null)
-                    return null;
+                    return new WebApiResponse()
+                    {
+                        Response = "User can not be null",
+                        Status = false
+                    };
 
                 // Register
                 await _uow.UserRepository.Add(user);
                 await _uow.Commit();
+                
                 // Get Token
                 var token = JWTHelper.CreateToken(user, secretKey);
                 return new WebApiResponse()

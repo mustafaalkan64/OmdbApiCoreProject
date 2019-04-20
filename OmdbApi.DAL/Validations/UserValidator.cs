@@ -29,6 +29,12 @@ namespace OmdbApi.DAL.Validations
                 .WithMessage("UserName Is Required")
                 .MaximumLength(50)
                 .WithMessage("Last Name Max Length Can Not Be Over 50");
+            RuleFor(u => u.Password)
+                .NotNull()
+                .NotEmpty()
+                .WithMessage("Password Is Required")
+                .MaximumLength(50)
+                .WithMessage("Password Max Length Can Not Be Over 50");
             RuleFor(u => u.Email)
                 .NotNull()
                 .NotEmpty()
