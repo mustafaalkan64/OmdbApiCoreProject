@@ -31,10 +31,20 @@ namespace OmdbApi.DAL.Services
             _mapper = mapper;
         }
 
-        public async Task AddMovie(Movie entity)
+        public async Task AddMovie(Movie movie)
         {
-            await _uow.MovieRepository.Add(entity);
-            await _uow.Commit();
+            try
+            {
+                await _uow.MovieRepository.Add(movie);
+                await _uow.Commit();
+                _logger.LogInformation("Movie Created Successfuly", movie);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Exception Error During Add Movie", movie);
+                throw e;
+            }
+
         }
 
         public async Task AddRating(Rating rating)

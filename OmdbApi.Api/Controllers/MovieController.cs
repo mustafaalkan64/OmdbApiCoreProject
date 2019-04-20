@@ -32,13 +32,11 @@ namespace OmdbApi.Api.Controllers
             try
             {
                 await _movieService.AddMovie(movie);
-                _logger.LogInformation("Movie Created Successfuly", movie);
                 return Ok();
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Exception Error During Add Movie", movie);
-                throw e;
+                return BadRequest(e.Message);
             }
 
         }
