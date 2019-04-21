@@ -12227,11 +12227,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject\\OmdbApi.DAL\\OmdbApi.DAL.csproj",
+      "projectUniqueName": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject1\\OmdbApi.DAL\\OmdbApi.DAL.csproj",
       "projectName": "OmdbApi.DAL",
-      "projectPath": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject\\OmdbApi.DAL\\OmdbApi.DAL.csproj",
+      "projectPath": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject1\\OmdbApi.DAL\\OmdbApi.DAL.csproj",
       "packagesPath": "C:\\Users\\Mustafa ALKAN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject\\OmdbApi.DAL\\obj\\",
+      "outputPath": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject1\\OmdbApi.DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

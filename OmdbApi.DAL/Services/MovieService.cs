@@ -65,28 +65,7 @@ namespace OmdbApi.DAL.Services
             if(year != null)
                 urlParameters += $"&y={year}";
 
-            using (HttpClient client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(URL);
-
-                // Add an Accept header for JSON format.
-                client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
-                // List data response.
-                HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
-                if (response.IsSuccessStatusCode)
-                {
-                    // Parse the response body.
-                    var dataObject = await response.Content.ReadAsAsync<MovieResponse>();  //Make sure to add a reference to System.Net.Http.Formatting.dll
-                    return dataObject;
-                }
-                else
-                {
-                    //Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-                    return null;
-                }
-            }                
+            return await GetMovieFromWebClient(URL, urlParameters);             
         }
 
         public async Task<MovieResponse> GetFromOmdbApiByImdbId(string imdbId)
@@ -95,28 +74,7 @@ namespace OmdbApi.DAL.Services
             string URL = "http://www.omdbapi.com/";
             string urlParameters = $"?i={imdbId}&plot=full&apikey={apikey}";
 
-            using (HttpClient client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(URL);
-
-                // Add an Accept header for JSON format.
-                client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
-                // List data response.
-                HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
-                if (response.IsSuccessStatusCode)
-                {
-                    // Parse the response body.
-                    var dataObject = await response.Content.ReadAsAsync<MovieResponse>();  //Make sure to add a reference to System.Net.Http.Formatting.dll
-                    return dataObject;
-                }
-                else
-                {
-                    //Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-                    return null;
-                }
-            }
+            return await GetMovieFromWebClient(URL, urlParameters);
         }
 
         public async Task<Movie> GetFromDb(string title, int? year)
@@ -230,6 +188,32 @@ namespace OmdbApi.DAL.Services
             {
                 _logger.LogError(e, "Exception Error Searching Any Movie", title);
                 throw e;
+            }
+        }
+
+        private async Task<MovieResponse> GetMovieFromWebClient(string URL, string urlParameters)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(URL);
+
+                // Add an Accept header for JSON format.
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // List data response.
+                HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body.
+                    var dataObject = await response.Content.ReadAsAsync<MovieResponse>();  //Make sure to add a reference to System.Net.Http.Formatting.dll
+                    return dataObject;
+                }
+                else
+                {
+                    //Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                    return null;
+                }
             }
         }
     }

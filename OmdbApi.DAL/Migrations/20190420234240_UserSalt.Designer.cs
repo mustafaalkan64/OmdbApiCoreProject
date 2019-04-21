@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OmdbApi.DAL;
 
 namespace OmdbApi.DAL.Migrations
 {
     [DbContext(typeof(OmdApiDbContext))]
-    partial class OmdApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190420234240_UserSalt")]
+    partial class UserSalt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,6 +111,8 @@ namespace OmdbApi.DAL.Migrations
                     b.Property<string>("Hash");
 
                     b.Property<string>("LastName");
+
+                    b.Property<string>("Password");
 
                     b.Property<string>("Salt");
 

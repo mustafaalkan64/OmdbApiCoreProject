@@ -6,7 +6,7 @@ namespace OmdbApi.DAL.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<string> Authenticate(string username, string password);
-        Task<WebApiResponse> Register(User user);
+        Task<WebApiResponse> Authenticate(string username, string password);
+        Task<WebApiResponse> Register(UserDto user);
     }
 }

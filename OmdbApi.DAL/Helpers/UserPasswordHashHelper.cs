@@ -7,31 +7,30 @@ using System.Threading.Tasks;
 
 namespace OmdbApi.DAL.Helpers
 {
-    public class UserPasswordHashHelper
+    public static class UserPasswordHashHelper
     {
-        public static byte[] CreateHash(byte[] salt, string valueToHash)
+        public static string CreateSalt(int size)
         {
-            using (var hmac = new HMACSHA512(salt))
-            {
-                return hmac.ComputeHash(Encoding.UTF8.GetBytes(valueToHash));
-            }
+            //Generate a cryptographic random number.
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] buff = new byte[size];
+            rng.GetBytes(buff);
+            return Convert.ToBase64String(buff);
         }
 
-        public static byte[] GenerateSalt()
+
+        public static string GenerateHash(string input, string salt)
         {
-            using (var hmac = new HMACSHA512())
-            {
-                return hmac.Key;
-            }
+            byte[] bytes = Encoding.UTF8.GetBytes(input + salt);
+            SHA256Managed sHA256ManagedString = new SHA256Managed();
+            byte[] hash = sHA256ManagedString.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
         }
 
-        public static bool VerifyHash(string password, byte[] salt, byte[] actualPassword)
+        public static bool AreEqual(string plainTextInput, string hashedInput, string salt)
         {
-            using (var hmac = new HMACSHA512(salt))
-            {
-                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return computedHash.SequenceEqual(actualPassword);
-            }
+            string newHashedPin = GenerateHash(plainTextInput, salt);
+            return newHashedPin.Equals(hashedInput);
         }
     }
 }

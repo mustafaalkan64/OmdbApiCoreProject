@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using OmdbApi.DAL.Entities;
+using OmdbApi.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OmdbApi.DAL.Validations
 {
-    public class UserValidator : AbstractValidator<User>
+    public class UserValidator : AbstractValidator<UserDto>
     {
         public UserValidator()
         {

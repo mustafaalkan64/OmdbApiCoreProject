@@ -48,7 +48,7 @@ namespace OmdbApi.DAL
             services.AddDbContext<OmdApiDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddFluentValidation();
-            services.AddTransient<IValidator<User>, UserValidator>();
+            services.AddTransient<IValidator<UserDto>, UserValidator>();
 
         }
 

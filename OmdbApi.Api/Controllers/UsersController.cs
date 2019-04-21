@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OmdbApi.DAL.Entities;
+using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Services.Interfaces;
 
 namespace OmdbApi.Api.Controllers
@@ -24,12 +25,12 @@ namespace OmdbApi.Api.Controllers
         {
             try
             {
-                var token = await _userService.Authenticate(userName, password);
+                var result = await _userService.Authenticate(userName, password);
 
-                if (string.IsNullOrEmpty(token))
-                    return BadRequest(new { message = "Username or password is incorrect" });
+                if (!result.Status)
+                    return BadRequest(new { message = result.Response });
 
-                return Ok(token);
+                return Ok(result.Response);
             }
             catch (Exception ex)
             {
@@ -40,7 +41,7 @@ namespace OmdbApi.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody]User userParam)
+        public async Task<IActionResult> Register([FromBody]UserDto userParam)
         {
             try
             {

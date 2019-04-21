@@ -76,7 +76,13 @@ namespace OmdbApi.Api
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<MovieResponse, Movie>();
-                cfg.CreateMap<Movie, MovieResponse>().ForMember(x => x.Error, opt => opt.Ignore()); ;
+                cfg.CreateMap<Movie, MovieResponse>()
+                    .ForMember(x => x.Error, opt => opt.Ignore());
+                cfg.CreateMap<UserDto, User>()
+                    .ForMember(x => x.Hash, opt => opt.Ignore())
+                    .ForMember(x => x.Salt, opt => opt.Ignore());
+                cfg.CreateMap<User, UserDto>()
+                    .ForMember(x => x.Password, opt => opt.Ignore());
             });
 
             IMapper mapper = config.CreateMapper();
