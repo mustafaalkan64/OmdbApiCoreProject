@@ -40,9 +40,7 @@ namespace OmdbApi.DAL.Services
             }
             else
             {
-                var hash = user.Hash;
-                var salt = user.Salt;
-                if (UserPasswordHashHelper.AreEqual(password, hash, salt))
+                if (UserPasswordHashHelper.AreEqual(password, user.Hash, user.Salt))
                 {
                     var token = JWTHelper.CreateToken(user, secretKey);
                     return new WebApiResponse()
