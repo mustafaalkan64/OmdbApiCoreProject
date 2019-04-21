@@ -13,35 +13,32 @@ namespace OmdbApi.DAL.Validations
         public UserValidator()
         {
             RuleFor(u => u.FirstName)
-                .NotNull()
                 .NotEmpty()
-                .WithMessage("FirstName Is Required")
+                .WithMessage("Please Enter FirstName")
                 .MaximumLength(50)
-                .WithMessage("First Name Max Length Can Not Be Over 50"); 
+                .WithMessage("FirstName Maximum Length Should Be 50"); 
             RuleFor(u => u.LastName)
-                .NotNull()
                 .NotEmpty()
-                .WithMessage("LastName Is Required")
+                .WithMessage("Please Enter LastName")
                 .MaximumLength(50)
-                .WithMessage("Last Name Max Length Can Not Be Over 50");
+                .WithMessage("LastName Maximum Length Should Be 50");
             RuleFor(u => u.Username)
-                .NotNull()
                 .NotEmpty()
-                .WithMessage("UserName Is Required")
+                .WithMessage("Please Enter UserName")
                 .MaximumLength(50)
-                .WithMessage("Last Name Max Length Can Not Be Over 50");
+                .WithMessage("UserName Maximum Length Should Be 50");
             RuleFor(u => u.Password)
-                .NotNull()
                 .NotEmpty()
-                .WithMessage("Password Is Required")
+                .WithMessage("Please Enter Password")
                 .MaximumLength(50)
-                .WithMessage("Password Max Length Can Not Be Over 50");
+                .WithMessage("Password Maximum Length Should Be 50")
+                .MinimumLength(8)
+                .WithMessage("Password Minimum Length Should Be 8");
             RuleFor(u => u.Email)
-                .NotNull()
                 .NotEmpty()
-                .WithMessage("Email Is Required")
+                .WithMessage("Please Enter Email")
                 .MaximumLength(150)
-                .WithMessage("Email Max Length Can Not Be Over 150")
+                .WithMessage("Email Maximum Length Should Be 150")
                 .EmailAddress()
                 .WithMessage("Email Format Is Invalid");
         }

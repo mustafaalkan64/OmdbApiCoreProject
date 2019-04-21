@@ -53,7 +53,7 @@ namespace OmdbApi.DAL.Services
                 {
                     return new WebApiResponse()
                     {
-                        Response = "Password is wrong",
+                        Response = "Password is Wrong",
                         Status = false
                     };
                 }

@@ -38,7 +38,6 @@ namespace OmdbApi.Api.Controllers
             {
                 return BadRequest(new { message = "An Error Occured While Authanticate" });
             }
-
         }
 
         [AllowAnonymous]
@@ -58,7 +57,6 @@ namespace OmdbApi.Api.Controllers
             {
                 return BadRequest(new { message = "An Error Occured While Register" });
             }
-
         }
 
         [Authorize(Roles = RoleType.User)]
