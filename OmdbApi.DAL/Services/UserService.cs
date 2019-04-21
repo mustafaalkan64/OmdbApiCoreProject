@@ -126,6 +126,64 @@ namespace OmdbApi.DAL.Services
 
         }
 
+        public async Task<WebApiResponse> ChangePassword(ChangePasswordModel changePasswordModel)
+        {
+            try
+            {
+                ChangePasswordValidator validator = new ChangePasswordValidator();
+                ValidationResult result = validator.Validate(changePasswordModel);
+                if (!result.IsValid)
+                {
+                    string allMessages = result.ToString("~");     // In this case, each message will be separated with a `~` 
+
+                    return new WebApiResponse()
+                    {
+                        Response = allMessages,
+                        Status = false
+                    };
+                }
+
+                var user = await _uow.UserRepository.FindBy(x => x.Id == changePasswordModel.UserId);
+                if (user == null)
+                {
+                    return new WebApiResponse()
+                    {
+                        Response = "User Not Found",
+                        Status = false
+                    };
+                }
+                else
+                {
+                    if (UserPasswordHashHelper.AreEqual(changePasswordModel.CurrentPassword, user.Hash, user.Salt))
+                    {
+                        user.Salt = UserPasswordHashHelper.CreateSalt(10);
+                        user.Hash = UserPasswordHashHelper.GenerateHash(changePasswordModel.NewPassword, user.Salt);
+                        await _uow.UserRepository.Update(user);
+                        await _uow.Commit();
+
+                        return new WebApiResponse()
+                        {
+                            Response = "Password Changed Successfuly",
+                            Status = true
+                        };
+                    }
+                    else
+                    {
+                        return new WebApiResponse()
+                        {
+                            Response = "Current Password is Wrong",
+                            Status = false
+                        };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         private async Task<bool> CheckUserName(string username)
         {
             var user = await _uow.UserRepository.FindBy(x => x.Username == username);

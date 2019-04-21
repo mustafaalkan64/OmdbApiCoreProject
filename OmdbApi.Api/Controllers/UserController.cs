@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OmdbApi.DAL.Consts;
 using OmdbApi.DAL.Entities;
 using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Services.Interfaces;
@@ -46,6 +48,30 @@ namespace OmdbApi.Api.Controllers
             try
             {
                 var response = await _userService.Register(userParam);
+
+                if (!response.Status)
+                    return BadRequest(new { message = response.Response });
+
+                return Ok(response.Response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "An Error Occured While Register" });
+            }
+
+        }
+
+        [Authorize(Roles = RoleType.User)]
+        [AllowAnonymous]
+        [HttpPost("changepasssword")]
+        public async Task<IActionResult> ChangePassword([FromBody]ChangePasswordModel changePasswordModel)
+        {
+            try
+            {
+                var claimsIdentity = this.User.Identity as ClaimsIdentity;
+                var userId = int.Parse(claimsIdentity.FindFirst(StaticVariables.UserId)?.Value);
+                changePasswordModel.UserId = userId;
+                var response = await _userService.ChangePassword(changePasswordModel);
 
                 if (!response.Status)
                     return BadRequest(new { message = response.Response });

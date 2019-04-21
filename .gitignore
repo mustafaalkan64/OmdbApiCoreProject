@@ -7,3 +7,7 @@
 /.vs/config
 /OmdbApi.Test/bin/Debug/netcoreapp2.1
 /OmdbApi.Test/obj
+/OmdbApi.DAL/obj/Release/netcoreapp2.1
+/OmdbApi.DAL/bin/Debug/netcoreapp2.1
+/.vs
+/OmdbApi.Api/obj/Release/netcoreapp2.1

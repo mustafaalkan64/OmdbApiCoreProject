@@ -15,7 +15,7 @@ using OmdbApi.DAL.Services.Interfaces;
 
 namespace OmdbApi.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CacheManagementController : ControllerBase
