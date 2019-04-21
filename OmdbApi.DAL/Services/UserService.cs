@@ -184,6 +184,11 @@ namespace OmdbApi.DAL.Services
 
         }
 
+        /// <summary>
+        /// Check If User Name Exists In Users Table
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         private async Task<bool> CheckUserName(string username)
         {
             var user = await _uow.UserRepository.FindBy(x => x.Username == username);
@@ -195,6 +200,11 @@ namespace OmdbApi.DAL.Services
         }
 
 
+        /// <summary>
+        /// Check If Email Exists In Users Table
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         private async Task<bool> CheckEmail(string email)
         {
             var user = await _uow.UserRepository.FindBy(x => x.Email == email);

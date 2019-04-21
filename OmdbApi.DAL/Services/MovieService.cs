@@ -31,6 +31,11 @@ namespace OmdbApi.DAL.Services
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// // Create Movie
+        /// </summary>
+        /// <param name="movie">Movie Model Parameter</param>
+        /// <returns></returns>
         public async Task AddMovie(Movie movie)
         {
             try
@@ -57,6 +62,12 @@ namespace OmdbApi.DAL.Services
             await _uow.Commit();
         }
 
+        /// <summary>
+        /// // Get Movie Data From Omdb Api With Title or Year
+        /// </summary>
+        /// <param name="title">Title Param</param>
+        /// <param name="year">Year Param</param>
+        /// <returns></returns>
         public async Task<MovieResponse> GetFromOmdbApi(string title, int? year)
         {
             var apikey = _configuration.GetValue<string>("omdbapikey");
@@ -77,6 +88,12 @@ namespace OmdbApi.DAL.Services
             return await GetMovieFromWebClient(URL, urlParameters);
         }
 
+        /// <summary>
+        /// // Get Movie Data From Db With Title or Year
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         public async Task<Movie> GetFromDb(string title, int? year)
         {
             return await _uow.MovieRepository.FindBy((x => x.Title.Contains(title) || x.Year == year.ToString()), a => a.Ratings);
@@ -140,29 +157,28 @@ namespace OmdbApi.DAL.Services
                     var resultFromDb = await GetFromDb(title, year);
                     if (resultFromDb == null)
                     {
-                        // Get Movie Data From Omdb Api
-                        var result = await GetFromOmdbApi(title, year);
-                        var response = Convert.ToBoolean(result.Response);
+                        
+                        var movie = await GetFromOmdbApi(title, year);
+                        var response = Convert.ToBoolean(movie.Response);
                         if (response)
                         {
-                            // Add Movie
-                            await AddMovie(result);
-                            int movieId = result.Id;
+                            await AddMovie(movie);
+                            int movieId = movie.Id;
 
                             // Add Ratings That Belong The Movie
-                            var ratings = result.Ratings;
+                            var ratings = movie.Ratings;
                             foreach (var rating in ratings)
                             {
                                 rating.MovieId = movieId;
                                 await AddRating(rating);
                             }
                             await Commit();
-                            _logger.LogInformation("Movie Create Operation Is Succesfull", result);
+                            _logger.LogInformation("Movie Create Operation Is Succesfull", movie);
                             
                             // Set Cache With Object That Comes Omdb Api
-                            obj = JsonConvert.SerializeObject(result);
+                            obj = JsonConvert.SerializeObject(movie);
                             _cache.Set(key, obj, cacheEntryOptions);
-                            return result;
+                            return movie;
                         }
                         return null;
                     }

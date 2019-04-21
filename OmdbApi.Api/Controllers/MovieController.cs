@@ -19,7 +19,6 @@ namespace OmdbApi.Api.Controllers
     public class MovieController : ControllerBase
     {
         private IMovieService _movieService;
-        private readonly ILogger<MovieController> _logger;
         public MovieController(IMovieService movieService)
         {
             _movieService = movieService;
@@ -53,7 +52,6 @@ namespace OmdbApi.Api.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Exception Error Searching Any Movie", title);
                 throw e;
             }
         }
