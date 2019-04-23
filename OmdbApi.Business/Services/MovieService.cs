@@ -3,7 +3,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using OmdbApi.DAL.Entities;
+using OmdbApi.DAL.EFDbContext;
 using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Uow;
 using OmdbApi.Domain.IServices;

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using OmdbApi.Api;
 using OmdbApi.Business.Consts;
 using OmdbApi.Business.Helpers;
-using OmdbApi.DAL.Entities;
+using OmdbApi.DAL.EFDbContext;
 using OmdbApi.DAL.Helpers;
 using System;
 using System.Collections.Generic;

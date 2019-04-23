@@ -1,4 +1,4 @@
-﻿using OmdbApi.DAL.Entities;
+﻿using OmdbApi.DAL.EFDbContext;
 using OmdbApi.DAL.Repositories;
 using System;
 using System.Threading.Tasks;

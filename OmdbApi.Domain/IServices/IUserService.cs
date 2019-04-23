@@ -1,4 +1,4 @@
-﻿using OmdbApi.DAL.Entities;
+﻿using OmdbApi.DAL.EFDbContext;
 using OmdbApi.DAL.Models;
 using System.Threading.Tasks;
 

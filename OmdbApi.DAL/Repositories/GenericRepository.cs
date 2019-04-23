@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OmdbApi.DAL.EFDbContext;
 using OmdbApi.DAL.Uow;
 using System;
 using System.Collections.Generic;

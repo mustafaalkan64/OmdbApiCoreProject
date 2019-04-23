@@ -13,17 +13,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using OmdbApi.DAL;
 using OmdbApi.DAL.Uow;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using Newtonsoft.Json.Serialization;
 using AutoMapper;
 using OmdbApi.DAL.Models;
-using OmdbApi.DAL.Entities;
 using OmdbApi.Domain.IServices;
 using OmdbApi.Business.Services;
 using OmdbApi.Business.Consts;
+using OmdbApi.DAL.EFDbContext;
 
 namespace OmdbApi.Api
 {

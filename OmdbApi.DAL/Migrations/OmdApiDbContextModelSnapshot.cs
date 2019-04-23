@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OmdbApi.DAL;
+using OmdbApi.DAL.EFDbContext;
 
 namespace OmdbApi.DAL.Migrations
 {

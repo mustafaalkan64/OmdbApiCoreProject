@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OmdbApi.DAL.Entities
+namespace OmdbApi.DAL.EFDbContext
 {
     public class Rating
     {

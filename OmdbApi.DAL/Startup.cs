@@ -1,27 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using FluentValidation;
+
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using OmdbApi.DAL.Entities;
-using OmdbApi.DAL.Helpers;
-using OmdbApi.DAL.Models;
-using OmdbApi.DAL.Repositories;
-using OmdbApi.DAL.Uow;
+using OmdbApi.DAL.EFDbContext;
 
 namespace OmdbApi.DAL
 {

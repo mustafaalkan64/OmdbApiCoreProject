@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OmdbApi.Business.Consts;
-using OmdbApi.DAL.Entities;
+using OmdbApi.DAL.EFDbContext;
 using OmdbApi.Domain.IServices;
 
 namespace OmdbApi.Api.Controllers

@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using OmdbApi.DAL.Entities;
 using System;
 
-namespace OmdbApi.DAL
+namespace OmdbApi.DAL.EFDbContext
 {
     public class OmdApiDbContext : DbContext
     {

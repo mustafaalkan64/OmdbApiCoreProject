@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using OmdbApi.Business.Consts;
 using OmdbApi.Business.Helpers;
 using OmdbApi.Business.Validations;
-using OmdbApi.DAL.Entities;
+using OmdbApi.DAL.EFDbContext;
 using OmdbApi.DAL.Helpers;
 using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Uow;

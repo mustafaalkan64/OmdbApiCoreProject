@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using OmdbApi.Business.Consts;
-using OmdbApi.DAL.Entities;
+using OmdbApi.DAL.EFDbContext;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

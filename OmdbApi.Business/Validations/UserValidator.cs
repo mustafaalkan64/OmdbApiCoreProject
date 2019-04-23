@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using OmdbApi.DAL.Entities;
 using OmdbApi.DAL.Models;
 using System;
 using System.Collections.Generic;

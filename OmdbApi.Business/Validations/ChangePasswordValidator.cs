@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
-using OmdbApi.DAL.Entities;
 using OmdbApi.DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OmdbApi.Business.Validations
 {
