@@ -36,7 +36,7 @@ namespace OmdbApi.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = "An Error Occured While Authanticate" });
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -55,7 +55,7 @@ namespace OmdbApi.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = "An Error Occured While Register" });
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -68,8 +68,11 @@ namespace OmdbApi.Api.Controllers
             {
                 var claimsIdentity = this.User.Identity as ClaimsIdentity;
                 var userId = int.Parse(claimsIdentity.FindFirst(StaticVariables.UserId)?.Value);
+
                 changePasswordModel.UserId = userId;
                 var response = await _userService.ChangePassword(changePasswordModel);
+                if (response == null)
+                    return NotFound("User Not Found");
 
                 if (!response.Status)
                     return BadRequest(new { message = response.Response });
@@ -78,7 +81,7 @@ namespace OmdbApi.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = "An Error Occured While Register" });
+                return BadRequest(new { message = ex.Message });
             }
 
         }

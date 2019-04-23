@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
+using Microsoft.Extensions.Logging;
 using OmdbApi.DAL.Consts;
 using OmdbApi.DAL.Entities;
 using OmdbApi.DAL.Helpers;
@@ -8,6 +9,7 @@ using OmdbApi.DAL.Services.Interfaces;
 using OmdbApi.DAL.Uow;
 using OmdbApi.DAL.Validations;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace OmdbApi.DAL.Services
@@ -17,66 +19,66 @@ namespace OmdbApi.DAL.Services
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
         private string secretKey;
+        private readonly ILogger<MovieService> _logger;
 
-        public UserService(IUnitOfWork unit, IMapper mapper)
+
+        public UserService(IUnitOfWork unit, IMapper mapper, ILogger<MovieService> logger)
         {
             _uow = unit;
             secretKey = AppSettingsParameters.Secret;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<WebApiResponse> Authenticate(string username, string password)
         {
-            var user = await _uow.UserRepository.FindBy(x => x.Username == username || x.Email == username);
+            try
+            {
+                var user = await _uow.UserRepository.FindBy(x => x.Username == username || x.Email == username);
 
-            // return null if user not found
-            if (user == null)
-            {
-                return new WebApiResponse()
+                // return null if user not found
+                if (user == null)
                 {
-                    Response = "Username or Email Not Found",
-                    Status = false
-                };
-            }
-            else
-            {
-                if (UserPasswordHashHelper.AreEqual(password, user.Hash, user.Salt))
-                {
-                    var token = JWTHelper.CreateToken(user, secretKey);
                     return new WebApiResponse()
                     {
-                        Response = token,
-                        Status = true
+                        Response = "Username or Email Not Found",
+                        Status = false
                     };
                 }
                 else
                 {
-                    return new WebApiResponse()
+                    if (UserPasswordHashHelper.AreEqual(password, user.Hash, user.Salt))
                     {
-                        Response = "Password is Wrong",
-                        Status = false
-                    };
+                        var token = JWTHelper.CreateToken(user, secretKey);
+                        return new WebApiResponse()
+                        {
+                            Response = token,
+                            Status = true
+                        };
+                    }
+                    else
+                    {
+                        return new WebApiResponse()
+                        {
+                            Response = "Password is Wrong",
+                            Status = false
+                        };
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Exception Error During Login User", username, password);
+                throw ex;
+            }
+            
         }
 
         public async Task<WebApiResponse> Register(UserDto userDto)
         {
             try
             {
-                UserValidator validator = new UserValidator();
-                ValidationResult result = validator.Validate(userDto);
-                if (!result.IsValid)
-                {
-                    string allMessages = result.ToString("~");     // In this case, each message will be separated with a `~` 
-
-                    return new WebApiResponse()
-                    {
-                        Response = allMessages,
-                        Status = false
-                    };
-                }
-
+                ValidatorUtility.FluentValidate(new UserValidator(), userDto);
                 if(!(await CheckUserName(userDto.Username)))
                 {
                     return new WebApiResponse()
@@ -121,6 +123,7 @@ namespace OmdbApi.DAL.Services
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Exception Error During User Register", userDto);
                 throw ex;
             }
 
@@ -130,28 +133,11 @@ namespace OmdbApi.DAL.Services
         {
             try
             {
-                ChangePasswordValidator validator = new ChangePasswordValidator();
-                ValidationResult result = validator.Validate(changePasswordModel);
-                if (!result.IsValid)
-                {
-                    string allMessages = result.ToString("~");     // In this case, each message will be separated with a `~` 
-
-                    return new WebApiResponse()
-                    {
-                        Response = allMessages,
-                        Status = false
-                    };
-                }
+                ValidatorUtility.FluentValidate(new ChangePasswordValidator(), changePasswordModel);
 
                 var user = await _uow.UserRepository.FindBy(x => x.Id == changePasswordModel.UserId);
-                if (user == null)
-                {
-                    return new WebApiResponse()
-                    {
-                        Response = "User Not Found",
-                        Status = false
-                    };
-                }
+                if (user == null) 
+                    return null;
                 else
                 {
                     if (UserPasswordHashHelper.AreEqual(changePasswordModel.CurrentPassword, user.Hash, user.Salt))
@@ -179,6 +165,7 @@ namespace OmdbApi.DAL.Services
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Exception Error During Change Password", changePasswordModel);
                 throw ex;
             }
 
