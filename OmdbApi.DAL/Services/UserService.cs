@@ -36,7 +36,6 @@ namespace OmdbApi.DAL.Services
             {
                 var user = await _uow.UserRepository.FindBy(x => x.Username == username || x.Email == username);
 
-                // return null if user not found
                 if (user == null)
                 {
                     return new WebApiResponse()

@@ -9,6 +9,11 @@ namespace OmdbApi.DAL.Helpers
 {
     public static class UserPasswordHashHelper
     {
+        /// <summary>
+        /// Create Salt For Password Hashing With 
+        /// </summary>
+        /// <param name="size">Salt Size</param>
+        /// <returns></returns>
         public static string CreateSalt(int size)
         {
             //Generate a cryptographic random number.
@@ -18,7 +23,12 @@ namespace OmdbApi.DAL.Helpers
             return Convert.ToBase64String(buff);
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input">Password Value</param>
+        /// <param name="salt">Salt Parameter</param>
+        /// <returns></returns>
         public static string GenerateHash(string input, string salt)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(input + salt);
@@ -27,6 +37,13 @@ namespace OmdbApi.DAL.Helpers
             return Convert.ToBase64String(hash);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="plainTextInput">Password</param>
+        /// <param name="hashedInput">Hash Value</param>
+        /// <param name="salt">Salt Value</param>
+        /// <returns></returns>
         public static bool AreEqual(string plainTextInput, string hashedInput, string salt)
         {
             string newHashedPin = GenerateHash(plainTextInput, salt);
