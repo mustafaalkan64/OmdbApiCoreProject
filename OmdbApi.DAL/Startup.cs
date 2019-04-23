@@ -22,7 +22,6 @@ using OmdbApi.DAL.Helpers;
 using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Repositories;
 using OmdbApi.DAL.Uow;
-using OmdbApi.DAL.Validations;
 
 namespace OmdbApi.DAL
 {
@@ -48,7 +47,6 @@ namespace OmdbApi.DAL
             services.AddDbContext<OmdApiDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddFluentValidation();
-            services.AddTransient<IValidator<UserDto>, UserValidator>();
 
         }
 

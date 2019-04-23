@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using OmdbApi.DAL.Consts;
 using OmdbApi.DAL.Entities;
-using OmdbApi.DAL.Models;
-using OmdbApi.DAL.Services.Interfaces;
+using OmdbApi.Domain.IServices;
 
 namespace OmdbApi.Api.Controllers
 {

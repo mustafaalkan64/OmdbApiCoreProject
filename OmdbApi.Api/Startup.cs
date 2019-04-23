@@ -13,10 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using OmdbApi.DAL.Helpers;
 using OmdbApi.DAL;
-using OmdbApi.DAL.Services;
-using OmdbApi.DAL.Services.Interfaces;
 using OmdbApi.DAL.Uow;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
@@ -25,6 +22,8 @@ using OmdbApi.DAL.Consts;
 using AutoMapper;
 using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Entities;
+using OmdbApi.Domain.IServices;
+using OmdbApi.Business.Services;
 
 namespace OmdbApi.Api
 {
@@ -145,9 +144,9 @@ namespace OmdbApi.Api
             app.UseHangfireDashboard();
             app.UseHangfireServer();
 
-            // Update All Movies Per 10 Minutes..
-            RecurringJob.AddOrUpdate<IMovieService>(
-                movieService => movieService.UpdateAllMovies(), "*/10 * * * *");
+            //// Update All Movies Per 10 Minutes..
+            //RecurringJob.AddOrUpdate<IMovieService>(
+            //    movieService => movieService.UpdateAllMovies(), "*/10 * * * *");
 
             //app.UseHttpsRedirection();
             app.UseMvc();

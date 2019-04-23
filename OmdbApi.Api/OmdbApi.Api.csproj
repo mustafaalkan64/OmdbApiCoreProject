@@ -32,7 +32,9 @@
     <Content Update="appsettings.DAL.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <ProjectReference Include="..\OmdbApi.Business\OmdbApi.Business.csproj" />
     <ProjectReference Include="..\OmdbApi.DAL\OmdbApi.DAL.csproj" />
+    <ProjectReference Include="..\OmdbApi.Domain\OmdbApi.Domain.csproj" />
   </ItemGroup>
 
 </Project>

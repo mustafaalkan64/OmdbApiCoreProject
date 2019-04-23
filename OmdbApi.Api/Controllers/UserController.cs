@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OmdbApi.DAL.Consts;
-using OmdbApi.DAL.Entities;
 using OmdbApi.DAL.Models;
-using OmdbApi.DAL.Services.Interfaces;
+using OmdbApi.Domain.IServices;
 
 namespace OmdbApi.Api.Controllers
 {
