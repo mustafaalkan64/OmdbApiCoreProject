@@ -24,5 +24,6 @@ namespace OmdbApi.DAL.Repositories
         Task<bool> Delete(Expression<Func<T, bool>> identity, params Expression<Func<T, object>>[] includes);
 
         Task<bool> Delete(T entity);
+        Task<bool> Any(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes);
     }
 }

@@ -78,7 +78,7 @@ namespace OmdbApi.DAL.Services
             try
             {
                 ValidatorUtility.FluentValidate(new UserValidator(), userDto);
-                if(!(await CheckUserName(userDto.Username)))
+                if(await CheckUserName(userDto.Username))
                 {
                     return new WebApiResponse()
                     {
@@ -87,7 +87,7 @@ namespace OmdbApi.DAL.Services
                     };
                 }
 
-                if (!(await CheckEmail(userDto.Email)))
+                if (await CheckEmail(userDto.Email))
                 {
                     return new WebApiResponse()
                     {
@@ -177,12 +177,7 @@ namespace OmdbApi.DAL.Services
         /// <returns></returns>
         private async Task<bool> CheckUserName(string username)
         {
-            var user = await _uow.UserRepository.FindBy(x => x.Username == username);
-
-            if (user == null)
-                return true;
-
-            return false;
+           return await _uow.UserRepository.Any(x => x.Username == username);
         }
 
 
@@ -193,12 +188,7 @@ namespace OmdbApi.DAL.Services
         /// <returns></returns>
         private async Task<bool> CheckEmail(string email)
         {
-            var user = await _uow.UserRepository.FindBy(x => x.Email == email);
-
-            if (user == null)
-                return true;
-
-            return false;
+            return await _uow.UserRepository.Any(x => x.Email == email);
         }
 
     }

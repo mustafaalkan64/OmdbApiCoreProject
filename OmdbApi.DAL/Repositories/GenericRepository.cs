@@ -76,6 +76,12 @@ namespace OmdbApi.DAL.Repositories
             return await result.FirstOrDefaultAsync();
         }
 
+        public virtual async Task<bool> Any(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        {
+            var result = await context.Set<T>().AnyAsync(predicate);
+            return result;
+        }
+
         public virtual async Task<bool> Update(T entity)
         {
             try
