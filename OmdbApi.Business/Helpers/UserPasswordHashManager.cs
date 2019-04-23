@@ -5,9 +5,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OmdbApi.DAL.Helpers
+namespace OmdbApi.Business.Helpers
 {
-    public static class UserPasswordHashHelper
+    public static class UserPasswordHashManager
     {
         /// <summary>
         /// Create Salt For Password Hashing With 

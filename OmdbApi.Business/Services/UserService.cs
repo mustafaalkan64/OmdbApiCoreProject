@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
 using Microsoft.Extensions.Logging;
+using OmdbApi.Business.Consts;
+using OmdbApi.Business.Helpers;
 using OmdbApi.Business.Validations;
-using OmdbApi.DAL.Consts;
 using OmdbApi.DAL.Entities;
 using OmdbApi.DAL.Helpers;
 using OmdbApi.DAL.Models;
@@ -46,9 +47,9 @@ namespace OmdbApi.Business.Services
                 }
                 else
                 {
-                    if (UserPasswordHashHelper.AreEqual(password, user.Hash, user.Salt))
+                    if (UserPasswordHashManager.AreEqual(password, user.Hash, user.Salt))
                     {
-                        var token = JWTHelper.CreateToken(user, secretKey);
+                        var token = JWTManager.CreateToken(user, secretKey);
                         return new WebApiResponse()
                         {
                             Response = token,
@@ -106,14 +107,14 @@ namespace OmdbApi.Business.Services
 
                 // Register
                 var user = _mapper.Map<User>(userDto);
-                user.Salt = UserPasswordHashHelper.CreateSalt(10);
-                user.Hash = UserPasswordHashHelper.GenerateHash(userDto.Password, user.Salt);
+                user.Salt = UserPasswordHashManager.CreateSalt(10);
+                user.Hash = UserPasswordHashManager.GenerateHash(userDto.Password, user.Salt);
 
                 await _uow.UserRepository.Add(user);
                 await _uow.Commit();
                 
                 // Get Token
-                var token = JWTHelper.CreateToken(user, secretKey);
+                var token = JWTManager.CreateToken(user, secretKey);
                 return new WebApiResponse()
                 {
                     Response = token,
@@ -139,10 +140,10 @@ namespace OmdbApi.Business.Services
                     return null;
                 else
                 {
-                    if (UserPasswordHashHelper.AreEqual(changePasswordModel.CurrentPassword, user.Hash, user.Salt))
+                    if (UserPasswordHashManager.AreEqual(changePasswordModel.CurrentPassword, user.Hash, user.Salt))
                     {
-                        user.Salt = UserPasswordHashHelper.CreateSalt(10);
-                        user.Hash = UserPasswordHashHelper.GenerateHash(changePasswordModel.NewPassword, user.Salt);
+                        user.Salt = UserPasswordHashManager.CreateSalt(10);
+                        user.Hash = UserPasswordHashManager.GenerateHash(changePasswordModel.NewPassword, user.Salt);
                         await _uow.UserRepository.Update(user);
                         await _uow.Commit();
 

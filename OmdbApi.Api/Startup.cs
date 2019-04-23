@@ -18,12 +18,12 @@ using OmdbApi.DAL.Uow;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using Newtonsoft.Json.Serialization;
-using OmdbApi.DAL.Consts;
 using AutoMapper;
 using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Entities;
 using OmdbApi.Domain.IServices;
 using OmdbApi.Business.Services;
+using OmdbApi.Business.Consts;
 
 namespace OmdbApi.Api
 {

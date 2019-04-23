@@ -1,18 +1,15 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using OmdbApi.DAL.Consts;
+using OmdbApi.Business.Consts;
 using OmdbApi.DAL.Entities;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace OmdbApi.DAL.Helpers
+namespace OmdbApi.Business.Helpers
 {
-    public static class JWTHelper
+    public static class JWTManager
     {
         public static string CreateToken(User user, string secretkey)
         {

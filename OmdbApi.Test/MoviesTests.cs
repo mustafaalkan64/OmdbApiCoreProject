@@ -3,7 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Protocols;
 using Newtonsoft.Json;
 using OmdbApi.Api;
-using OmdbApi.DAL.Consts;
+using OmdbApi.Business.Consts;
+using OmdbApi.Business.Helpers;
 using OmdbApi.DAL.Entities;
 using OmdbApi.DAL.Helpers;
 using System;
@@ -40,7 +41,7 @@ namespace OmdbApi.Test
                 LastName = "Alkan"
             };
             var secretKey = AppSettingsParameters.Secret;
-            var token = JWTHelper.CreateToken(user, secretKey);
+            var token = JWTManager.CreateToken(user, secretKey);
             Client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
             var response = await Client.GetAsync(request);
             // Assert

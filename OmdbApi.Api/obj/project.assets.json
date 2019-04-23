@@ -4904,6 +4904,21 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "OmdbApi.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "Microsoft.NETCore.App": "2.1.0",
+          "OmdbApi.DAL": "1.0.0",
+          "OmdbApi.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/OmdbApi.Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/OmdbApi.Business.dll": {}
+        }
+      },
       "OmdbApi.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
@@ -4924,6 +4939,20 @@
         },
         "runtime": {
           "bin/placeholder/OmdbApi.DAL.dll": {}
+        }
+      },
+      "OmdbApi.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "Microsoft.NETCore.App": "2.1.0",
+          "OmdbApi.DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/OmdbApi.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/OmdbApi.Domain.dll": {}
         }
       }
     }
@@ -13224,10 +13253,20 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "OmdbApi.Business/1.0.0": {
+      "type": "project",
+      "path": "../OmdbApi.Business/OmdbApi.Business.csproj",
+      "msbuildProject": "../OmdbApi.Business/OmdbApi.Business.csproj"
+    },
     "OmdbApi.DAL/1.0.0": {
       "type": "project",
       "path": "../OmdbApi.DAL/OmdbApi.DAL.csproj",
       "msbuildProject": "../OmdbApi.DAL/OmdbApi.DAL.csproj"
+    },
+    "OmdbApi.Domain/1.0.0": {
+      "type": "project",
+      "path": "../OmdbApi.Domain/OmdbApi.Domain.csproj",
+      "msbuildProject": "../OmdbApi.Domain/OmdbApi.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -13242,7 +13281,9 @@
       "Microsoft.NETCore.App >= 2.1.0",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.0.2105168",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.1",
+      "OmdbApi.Business >= 1.0.0",
       "OmdbApi.DAL >= 1.0.0",
+      "OmdbApi.Domain >= 1.0.0",
       "Swashbuckle.AspNetCore >= 4.0.1"
     ]
   },
@@ -13253,11 +13294,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject\\OmdbApi.Api\\OmdbApi.Api.csproj",
+      "projectUniqueName": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject1\\OmdbApi.Api\\OmdbApi.Api.csproj",
       "projectName": "OmdbApi.Api",
-      "projectPath": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject\\OmdbApi.Api\\OmdbApi.Api.csproj",
+      "projectPath": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject1\\OmdbApi.Api\\OmdbApi.Api.csproj",
       "packagesPath": "C:\\Users\\Mustafa ALKAN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject\\OmdbApi.Api\\obj\\",
+      "outputPath": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject1\\OmdbApi.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13277,8 +13318,14 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject\\OmdbApi.DAL\\OmdbApi.DAL.csproj": {
-              "projectPath": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject\\OmdbApi.DAL\\OmdbApi.DAL.csproj"
+            "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject1\\OmdbApi.Business\\OmdbApi.Business.csproj": {
+              "projectPath": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject1\\OmdbApi.Business\\OmdbApi.Business.csproj"
+            },
+            "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject1\\OmdbApi.DAL\\OmdbApi.DAL.csproj": {
+              "projectPath": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject1\\OmdbApi.DAL\\OmdbApi.DAL.csproj"
+            },
+            "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject1\\OmdbApi.Domain\\OmdbApi.Domain.csproj": {
+              "projectPath": "C:\\Users\\Mustafa ALKAN\\Documents\\GitHub\\OmdbApiCoreProject1\\OmdbApi.Domain\\OmdbApi.Domain.csproj"
             }
           }
         }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OmdbApi.DAL.Consts
+namespace OmdbApi.Business.Consts
 {
     public class AppSettingsParameters
     {
