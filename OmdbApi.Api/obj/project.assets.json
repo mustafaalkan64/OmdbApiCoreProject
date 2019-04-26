@@ -54,18 +54,18 @@
           "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.dll": {}
         }
       },
-      "Hangfire/1.7.0": {
+      "Hangfire/1.7.1": {
         "type": "package",
         "dependencies": {
-          "Hangfire.AspNetCore": "[1.7.0]",
-          "Hangfire.Core": "[1.7.0]",
-          "Hangfire.SqlServer": "[1.7.0]"
+          "Hangfire.AspNetCore": "[1.7.1]",
+          "Hangfire.Core": "[1.7.1]",
+          "Hangfire.SqlServer": "[1.7.1]"
         }
       },
-      "Hangfire.AspNetCore/1.7.0": {
+      "Hangfire.AspNetCore/1.7.1": {
         "type": "package",
         "dependencies": {
-          "Hangfire.Core": "[1.7.0]",
+          "Hangfire.Core": "[1.7.1]",
           "Microsoft.AspNetCore.Antiforgery": "2.0.0",
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.0.0",
           "Microsoft.AspNetCore.Http.Abstractions": "2.0.0",
@@ -79,7 +79,7 @@
           "lib/netstandard2.0/Hangfire.AspNetCore.dll": {}
         }
       },
-      "Hangfire.Core/1.7.0": {
+      "Hangfire.Core/1.7.1": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "11.0.1"
@@ -102,10 +102,10 @@
           }
         }
       },
-      "Hangfire.SqlServer/1.7.0": {
+      "Hangfire.SqlServer/1.7.1": {
         "type": "package",
         "dependencies": {
-          "Hangfire.Core": "[1.7.0]",
+          "Hangfire.Core": "[1.7.1]",
           "System.Data.SqlClient": "4.4.0"
         },
         "compile": {
@@ -5020,22 +5020,22 @@
         "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.dll"
       ]
     },
-    "Hangfire/1.7.0": {
-      "sha512": "BAWxZ+I9ORF0NECswaZl3vwL6yIqkqVU6oHqyLGn6lLb4FjNyZtTDGQy+6eb/JbsBY4amaYsqnL7eXQ42E6FHw==",
+    "Hangfire/1.7.1": {
+      "sha512": "nH5Zio+T5h61ecKzluLo4QkOciTHok+6w8ny88ghHMXab9bcSAF6OOPA/z0Bp7tk7ki5sX3qP7NlU+z915KVsA==",
       "type": "package",
-      "path": "hangfire/1.7.0",
+      "path": "hangfire/1.7.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "hangfire.1.7.0.nupkg.sha512",
+        "hangfire.1.7.1.nupkg.sha512",
         "hangfire.nuspec",
         "readme.txt"
       ]
     },
-    "Hangfire.AspNetCore/1.7.0": {
-      "sha512": "D0fMkJEDwPsjA8fE63Pl8IF83XIglfjCPhHj5bEr9GZNyWNfjj4Hsax3AjrxdPI+94mhVZhB3YSu/SmulivG8w==",
+    "Hangfire.AspNetCore/1.7.1": {
+      "sha512": "tXLsupHAH9yg0y6oMWefBcUY2BwKr4/jI7kVOsMJZLS1WsJs9f6fO7fGa5jogGuDPGYdo6xm7ZfywZehnHQqVQ==",
       "type": "package",
-      "path": "hangfire.aspnetcore/1.7.0",
+      "path": "hangfire.aspnetcore/1.7.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5045,7 +5045,7 @@
         "LICENSE_ROYALTYFREE",
         "LICENSE_STANDARD",
         "NOTICES",
-        "hangfire.aspnetcore.1.7.0.nupkg.sha512",
+        "hangfire.aspnetcore.1.7.1.nupkg.sha512",
         "hangfire.aspnetcore.nuspec",
         "lib/net451/Hangfire.AspNetCore.dll",
         "lib/net451/Hangfire.AspNetCore.xml",
@@ -5055,10 +5055,10 @@
         "lib/netstandard2.0/Hangfire.AspNetCore.xml"
       ]
     },
-    "Hangfire.Core/1.7.0": {
-      "sha512": "eyTH7qkOnklxN1viCg/WFsno7hu8zpYouHKeq3kjGAa1ypLqImPo2T9gWkhWoqsaabKMmfrZ6k3tgveLfdRTvQ==",
+    "Hangfire.Core/1.7.1": {
+      "sha512": "mZPfgI0/7NUS6UUNcHklUl7Z7REAApYPzKv8fDmnC4Ja8+M6et3qclRn85onK5KAU3i02eLg65yPEG/xxb2dWQ==",
       "type": "package",
-      "path": "hangfire.core/1.7.0",
+      "path": "hangfire.core/1.7.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5068,7 +5068,7 @@
         "LICENSE_ROYALTYFREE",
         "LICENSE_STANDARD",
         "NOTICES",
-        "hangfire.core.1.7.0.nupkg.sha512",
+        "hangfire.core.1.7.1.nupkg.sha512",
         "hangfire.core.nuspec",
         "lib/net45/Hangfire.Core.dll",
         "lib/net45/Hangfire.Core.xml",
@@ -5092,10 +5092,11 @@
         "lib/netstandard2.0/zh/Hangfire.Core.resources.dll"
       ]
     },
-    "Hangfire.SqlServer/1.7.0": {
-      "sha512": "oAlC3NTCFDEsl9WH6wOlv4fKxRRJ4UzyhgFKeRNSjhMMbRHuwf/e4uqj/f68A3Q9+TSrR573JcsyO8SkYiN9hw==",
+    "Hangfire.SqlServer/1.7.1": {
+      "sha512": "tzRBUK1kUWfFp4062KdjnoxSUdhdfY4eCEbJUaLdL54b+q1+KibfUvMetWbDahaFFS9S6Z3hlRkrKq/BfivEUw==",
       "type": "package",
-      "path": "hangfire.sqlserver/1.7.0",
+      "path": "hangfire.sqlserver/1.7.1",
+      "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5105,7 +5106,7 @@
         "LICENSE_ROYALTYFREE",
         "LICENSE_STANDARD",
         "NOTICES",
-        "hangfire.sqlserver.1.7.0.nupkg.sha512",
+        "hangfire.sqlserver.1.7.1.nupkg.sha512",
         "hangfire.sqlserver.nuspec",
         "lib/net45/Hangfire.SqlServer.dll",
         "lib/net45/Hangfire.SqlServer.xml",
@@ -13271,7 +13272,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-      "HangFire >= 1.7.0",
+      "Hangfire >= 1.7.1",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
@@ -13339,9 +13340,9 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
-          "HangFire": {
+          "Hangfire": {
             "target": "Package",
-            "version": "[1.7.0, )"
+            "version": "[1.7.1, )"
           },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
