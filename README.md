@@ -14,4 +14,5 @@ Framework development course playground.
 - AutoMapper
 - Dependency Injection
 - IOC
+- Hangfire
 - Integration Test
