@@ -19,7 +19,6 @@ namespace OmdbApi.Api.Controllers
             _movieService = movieService;
         }
 
-        // POST api/values
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]Movie movie)
         {
@@ -47,7 +46,7 @@ namespace OmdbApi.Api.Controllers
             }
             catch (Exception e)
             {
-                throw e;
+                return BadRequest(e.Message);
             }
         }
     }

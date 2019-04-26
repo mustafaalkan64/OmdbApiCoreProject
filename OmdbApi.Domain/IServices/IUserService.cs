@@ -6,7 +6,7 @@ namespace OmdbApi.Domain.IServices
 {
     public interface IUserService
     {
-        Task<WebApiResponse> Authenticate(string username, string password);
+        Task<WebApiResponse> Authenticate(UserLoginDto userLoginDto);
         Task<WebApiResponse> Register(UserDto user);
         Task<WebApiResponse> ChangePassword(ChangePasswordModel changePasswordModel);
     }

@@ -31,11 +31,13 @@ namespace OmdbApi.Business.Services
             _logger = logger;
         }
 
-        public async Task<WebApiResponse> Authenticate(string username, string password)
+        public async Task<WebApiResponse> Authenticate(UserLoginDto userLoginDto)
         {
             try
             {
-                var user = await _uow.UserRepository.FindBy(x => x.Username == username || x.Email == username);
+                ValidatorUtility.FluentValidate(new UserLoginValidator(), userLoginDto);
+
+                var user = await _uow.UserRepository.FindBy(x => x.Username.Equals(userLoginDto.Username) || x.Email.Equals(userLoginDto.Username));
 
                 if (user == null)
                 {
@@ -47,7 +49,7 @@ namespace OmdbApi.Business.Services
                 }
                 else
                 {
-                    if (UserPasswordHashManager.AreEqual(password, user.Hash, user.Salt))
+                    if (UserPasswordHashManager.AreEqual(userLoginDto.Password, user.Hash, user.Salt))
                     {
                         var token = JWTManager.CreateToken(user, secretKey);
                         return new WebApiResponse()
@@ -68,7 +70,7 @@ namespace OmdbApi.Business.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Exception Error During Login User", username, password);
+                _logger.LogError(ex, "Exception Error During Login User", userLoginDto.Username);
                 throw ex;
             }
             
@@ -135,7 +137,7 @@ namespace OmdbApi.Business.Services
             {
                 ValidatorUtility.FluentValidate(new ChangePasswordValidator(), changePasswordModel);
 
-                var user = await _uow.UserRepository.FindBy(x => x.Id == changePasswordModel.UserId);
+                var user = await _uow.UserRepository.FindBy(x => x.Id.Equals(changePasswordModel.UserId));
                 if (user == null) 
                     return null;
                 else
@@ -178,7 +180,7 @@ namespace OmdbApi.Business.Services
         /// <returns></returns>
         private async Task<bool> CheckUserName(string username)
         {
-           return await _uow.UserRepository.Any(x => x.Username == username);
+           return await _uow.UserRepository.Any(x => x.Username.Equals(username));
         }
 
 
@@ -189,7 +191,7 @@ namespace OmdbApi.Business.Services
         /// <returns></returns>
         private async Task<bool> CheckEmail(string email)
         {
-            return await _uow.UserRepository.Any(x => x.Email == email);
+            return await _uow.UserRepository.Any(x => x.Email.Equals(email));
         }
 
     }

@@ -42,4 +42,18 @@ namespace OmdbApi.Business.Validations
                 .WithMessage("Email Format Is Invalid");
         }
     }
+
+    public class UserLoginValidator : AbstractValidator<UserLoginDto>
+    {
+        public UserLoginValidator()
+        {
+
+            RuleFor(u => u.Username)
+                .NotEmpty()
+                .WithMessage("Please Enter UserName");
+            RuleFor(u => u.Password)
+                .NotEmpty()
+                .WithMessage("Please Enter Password");
+        }
+    }
 }

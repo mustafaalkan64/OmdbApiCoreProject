@@ -96,7 +96,7 @@ namespace OmdbApi.Business.Services
         /// <returns></returns>
         public async Task<Movie> GetFromDb(string title, int? year)
         {
-            return await _uow.MovieRepository.FindBy((x => x.Title.Contains(title) || x.Year == year.ToString()), a => a.Ratings);
+            return await _uow.MovieRepository.FindBy((x => x.Title.Contains(title) || x.Year.Equals(year.ToString())), a => a.Ratings);
         }
 
         public async Task UpdateAllMovies()
@@ -115,7 +115,7 @@ namespace OmdbApi.Business.Services
                     var ratings = movieResultFromOmdb.Ratings;
                     foreach (var rating in ratings)
                     {
-                        var _rating = await _uow.RatingRepository.FindBy(a => a.Source == rating.Source && a.MovieId == movie.Id);
+                        var _rating = await _uow.RatingRepository.FindBy(a => a.Source.Equals(rating.Source) && a.MovieId.Equals(movie.Id));
                         if(_rating != null)
                         {
                             // Auto Mapper Will be Implemented to Map Operations..

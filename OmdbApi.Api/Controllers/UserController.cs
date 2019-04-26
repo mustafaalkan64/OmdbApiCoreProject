@@ -22,11 +22,11 @@ namespace OmdbApi.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Authenticate(string userName, string password)
+        public async Task<IActionResult> Authenticate([FromBody]UserLoginDto user)
         {
             try
             {
-                var result = await _userService.Authenticate(userName, password);
+                var result = await _userService.Authenticate(user);
 
                 if (!result.Status)
                     return BadRequest(new { message = result.Response });
