@@ -30,7 +30,7 @@ namespace OmdbApi.Test
         [Fact]
         public async Task SearchMovieTestWithAuthorize()
         {
-            var titleParam = "blade";
+            var titleParam = "Blade";
             // Arrange
             var request = $"/api/Movie/SearchMovie?title={titleParam}";
             // Act
@@ -45,14 +45,18 @@ namespace OmdbApi.Test
             var secretKey = AppSettingsParameters.Secret;
             var token = JWTManager.CreateToken(user, secretKey);
             Client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+
             var response = await Client.GetAsync(request);
-            // Assert
             var jsonResponse = await response.Content.ReadAsStringAsync();
             var movieResponse = JsonConvert.DeserializeObject<MovieResponse>(jsonResponse);
             response.EnsureSuccessStatusCode();
+
+            // Asserts
             Assert.NotNull(movieResponse);
             Assert.Equal(movieResponse.Response, "True");
             Assert.Equal(movieResponse.Error, null);
+            Assert.Equal(movieResponse.Title, titleParam);
+
         }
 
         [Fact]
