@@ -7,8 +7,10 @@ using OmdbApi.Business.Consts;
 using OmdbApi.Business.Helpers;
 using OmdbApi.DAL.EFDbContext;
 using OmdbApi.DAL.Helpers;
+using OmdbApi.DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +28,7 @@ namespace OmdbApi.Test
         }
 
         [Fact]
-        public async Task TestGetStockItemsAsync()
+        public async Task SearchMovieTestWithAuthorize()
         {
             var titleParam = "blade";
             // Arrange
@@ -45,7 +47,25 @@ namespace OmdbApi.Test
             Client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
             var response = await Client.GetAsync(request);
             // Assert
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            var movieResponse = JsonConvert.DeserializeObject<MovieResponse>(jsonResponse);
             response.EnsureSuccessStatusCode();
+            Assert.NotNull(movieResponse);
+            Assert.Equal(movieResponse.Response, "True");
+            Assert.Equal(movieResponse.Error, null);
+        }
+
+        [Fact]
+        public async Task SearchMovieTest()
+        {
+            var titleParam = "blade";
+            // Arrange
+            var request = $"/api/Movie/SearchMovie?title={titleParam}";
+
+            var response = await Client.GetAsync(request);
+            // Assert
+            Assert.Equal(response.StatusCode, HttpStatusCode.Unauthorized);
+
         }
 
         [Fact]
