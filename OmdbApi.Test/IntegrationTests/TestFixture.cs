@@ -14,7 +14,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 
-namespace OmdbApi.Test
+namespace OmdbApi.Test.IntegrationTests
 {
     public class TestFixture<TStartup> : IDisposable
     {

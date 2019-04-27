@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 
-namespace OmdbApi.Test
+namespace OmdbApi.Test.IntegrationTests
 {
     public static class ContentHelper
     {

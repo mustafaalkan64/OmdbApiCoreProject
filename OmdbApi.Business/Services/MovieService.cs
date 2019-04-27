@@ -159,7 +159,7 @@ namespace OmdbApi.Business.Services
                     {
                         
                         var movie = await GetFromOmdbApi(title, year);
-                        var response = Convert.ToBoolean(movie.Response);
+                        var response = movie.Response;
                         if (response)
                         {
                             await AddMovie(movie);
@@ -187,6 +187,8 @@ namespace OmdbApi.Business.Services
                         obj = JsonConvert.SerializeObject(resultFromDb);
                         _cache.Set(key, obj, cacheEntryOptions);
                         var movieResponse = _mapper.Map<MovieResponse>(resultFromDb);
+                        movieResponse.Response = true;
+                        movieResponse.Error = null;
                         return movieResponse;
                     }
                 }

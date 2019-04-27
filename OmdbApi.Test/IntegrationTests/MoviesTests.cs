@@ -16,7 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace OmdbApi.Test
+namespace OmdbApi.Test.IntegrationTests
 {
     public class MoviesTests : IClassFixture<TestFixture<Startup>>
     {
@@ -53,7 +53,7 @@ namespace OmdbApi.Test
 
             // Asserts
             Assert.NotNull(movieResponse);
-            Assert.Equal(movieResponse.Response, "True");
+            Assert.Equal(movieResponse.Response, true);
             Assert.Equal(movieResponse.Error, null);
             Assert.Equal(movieResponse.Title, titleParam);
 
