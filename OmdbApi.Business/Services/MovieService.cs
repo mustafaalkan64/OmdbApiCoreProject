@@ -178,9 +178,8 @@ namespace OmdbApi.Business.Services
                             // Set Cache With Object That Comes Omdb Api
                             obj = JsonConvert.SerializeObject(movie);
                             _cache.Set(key, obj, cacheEntryOptions);
-                            return movie;
                         }
-                        return null;
+                        return movie;
                     }
                     else
                     {

@@ -1,20 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using OmdbApi.DAL.EFDbContext;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace OmdbApi.DAL.EFDbContext
+namespace OmdbApi.DAL.Models
 {
-    public class Movie
+    public class MovieDto
     {
-        public Movie()
+        public MovieDto()
         {
             Ratings = new List<Rating>();
         }
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Title { get; set; }
         public string Year { get; set; }
@@ -42,5 +39,4 @@ namespace OmdbApi.DAL.EFDbContext
         public string Website { get; set; }
         public string Response { get; set; }
     }
-    
 }

@@ -42,6 +42,8 @@ namespace OmdbApi.Api.Controllers
                 var movieResult = await _movieService.SearchMovie(title, year);
                 if (movieResult == null)
                     return NotFound();
+                if (movieResult.Response == "False")
+                    return BadRequest(movieResult.Error);
                 return Ok(movieResult);
             }
             catch (Exception e)
