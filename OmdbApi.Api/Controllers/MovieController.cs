@@ -32,7 +32,7 @@ namespace OmdbApi.Api.Controllers
                 if (movieResult == null)
                     return NotFound();
                 if (movieResult.Response == false)
-                    return BadRequest(movieResult.Error);
+                    return BadRequest(movieResult);
                 return Ok(movieResult);
             }
             catch (Exception e)

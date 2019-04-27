@@ -26,4 +26,8 @@
     <ProjectReference Include="..\OmdbApi.DAL\OmdbApi.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UnitTest\" />
+  </ItemGroup>
+
 </Project>
