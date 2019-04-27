@@ -21,7 +21,7 @@ using AutoMapper;
 using OmdbApi.DAL.Models;
 using OmdbApi.Domain.IServices;
 using OmdbApi.Business.Services;
-using OmdbApi.Business.Consts;
+using OmdbApi.DAL.Consts;
 using OmdbApi.DAL.EFDbContext;
 
 namespace OmdbApi.Api
@@ -71,16 +71,20 @@ namespace OmdbApi.Api
                 .AddAuthorization() // Note - this is on the IMvcBuilder, not the service collection
                 .AddJsonFormatters(options => options.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
-            var config = new AutoMapper.MapperConfiguration(cfg =>
+            var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<MovieResponse, Movie>();
                 cfg.CreateMap<Movie, MovieResponse>()
-                    .ForMember(x => x.Error, opt => opt.Ignore());
+                    .ForMember(x => x.Error, opt => opt.Ignore())
+                    .ForMember(x => x.Response, opt => opt.Ignore());
                 cfg.CreateMap<UserDto, User>()
                     .ForMember(x => x.Hash, opt => opt.Ignore())
                     .ForMember(x => x.Salt, opt => opt.Ignore());
                 cfg.CreateMap<User, UserDto>()
                     .ForMember(x => x.Password, opt => opt.Ignore());
+                cfg.CreateMap<MovieDto, Movie>()
+                    .ForMember(x => x.Id, opt => opt.Ignore());
+                cfg.CreateMap<Movie, MovieDto>();
             });
 
             IMapper mapper = config.CreateMapper();

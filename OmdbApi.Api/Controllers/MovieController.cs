@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OmdbApi.Business.Consts;
+using OmdbApi.DAL.Consts;
 using OmdbApi.DAL.EFDbContext;
+using OmdbApi.DAL.Models;
 using OmdbApi.Domain.IServices;
 
 namespace OmdbApi.Api.Controllers
@@ -14,24 +16,11 @@ namespace OmdbApi.Api.Controllers
     public class MovieController : ControllerBase
     {
         private IMovieService _movieService;
-        public MovieController(IMovieService movieService)
+        private IMapper _mapper;
+        public MovieController(IMovieService movieService, IMapper mapper)
         {
             _movieService = movieService;
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Movie movie)
-        {
-            try
-            {
-                await _movieService.AddMovie(movie);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-
+            _mapper = mapper;
         }
 
         [HttpGet("SearchMovie")]

@@ -12,7 +12,6 @@ namespace OmdbApi.DAL.Models
         {
             Ratings = new List<Rating>();
         }
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Year { get; set; }
         public string Rated { get; set; }
@@ -37,6 +36,5 @@ namespace OmdbApi.DAL.Models
         public string BoxOffice { get; set; }
         public string Production { get; set; }
         public string Website { get; set; }
-        public string Response { get; set; }
     }
 }

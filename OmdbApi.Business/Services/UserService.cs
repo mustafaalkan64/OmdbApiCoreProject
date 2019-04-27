@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
 using Microsoft.Extensions.Logging;
-using OmdbApi.Business.Consts;
+using OmdbApi.DAL.Consts;
 using OmdbApi.Business.Helpers;
 using OmdbApi.Business.Validations;
 using OmdbApi.DAL.EFDbContext;

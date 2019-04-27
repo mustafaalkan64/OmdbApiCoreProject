@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Protocols;
 using Newtonsoft.Json;
 using OmdbApi.Api;
-using OmdbApi.Business.Consts;
+using OmdbApi.DAL.Consts;
 using OmdbApi.Business.Helpers;
 using OmdbApi.DAL.EFDbContext;
 using OmdbApi.DAL.Helpers;

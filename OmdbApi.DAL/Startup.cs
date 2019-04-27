@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OmdbApi.DAL.Consts;
 using OmdbApi.DAL.EFDbContext;
 
 namespace OmdbApi.DAL
@@ -33,7 +34,8 @@ namespace OmdbApi.DAL
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<OmdApiDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<OmdApiDbContext>(opts => opts.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddDbContext<OmdApiDbContext>(opts => opts.UseSqlServer(AppSettingsParameters.ConnectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddFluentValidation();
 

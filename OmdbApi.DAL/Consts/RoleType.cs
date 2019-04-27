@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OmdbApi.Business.Consts
+namespace OmdbApi.DAL.Consts
 {
     public static class RoleType
     {
