@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmdbApi.Web", "OmdbApi.Web\OmdbApi.Web.csproj", "{F1646CC4-269F-4A77-AFBA-15218807B684}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmdbApi.Api", "OmdbApi.Api\OmdbApi.Api.csproj", "{11D26100-F8E2-4EF8-8CBE-5DE1DBEE6F64}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmdbApi.DAL", "OmdbApi.DAL\OmdbApi.DAL.csproj", "{61C88240-47E9-4080-95ED-3E2A2049487C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmdbApi.Test", "OmdbApi.Test\OmdbApi.Test.csproj", "{9535C217-BD75-4FB4-A348-2AB497F3831D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmdbApi.Business", "OmdbApi.Business\OmdbApi.Business.csproj", "{37DA7F2A-9E14-4289-BA64-685045AE8ACE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmdbApi.Business", "OmdbApi.Business\OmdbApi.Business.csproj", "{37DA7F2A-9E14-4289-BA64-685045AE8ACE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmdbApi.Domain", "OmdbApi.Domain\OmdbApi.Domain.csproj", "{F5701524-51B8-45E4-9DDC-F2A67647E7A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmdbApi.Domain", "OmdbApi.Domain\OmdbApi.Domain.csproj", "{F5701524-51B8-45E4-9DDC-F2A67647E7A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmdbApi.Web", "OmdbApi.Web\OmdbApi.Web.csproj", "{B6B01FDC-BAFB-4DAF-B5EB-91B632C197AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F1646CC4-269F-4A77-AFBA-15218807B684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1646CC4-269F-4A77-AFBA-15218807B684}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1646CC4-269F-4A77-AFBA-15218807B684}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1646CC4-269F-4A77-AFBA-15218807B684}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11D26100-F8E2-4EF8-8CBE-5DE1DBEE6F64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11D26100-F8E2-4EF8-8CBE-5DE1DBEE6F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11D26100-F8E2-4EF8-8CBE-5DE1DBEE6F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{F5701524-51B8-45E4-9DDC-F2A67647E7A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5701524-51B8-45E4-9DDC-F2A67647E7A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5701524-51B8-45E4-9DDC-F2A67647E7A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6B01FDC-BAFB-4DAF-B5EB-91B632C197AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B01FDC-BAFB-4DAF-B5EB-91B632C197AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B01FDC-BAFB-4DAF-B5EB-91B632C197AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B01FDC-BAFB-4DAF-B5EB-91B632C197AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

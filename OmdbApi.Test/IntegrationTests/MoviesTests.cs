@@ -1,18 +1,11 @@
-﻿using GST.Fake.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Protocols;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using OmdbApi.Api;
 using OmdbApi.DAL.Consts;
 using OmdbApi.Business.Helpers;
 using OmdbApi.DAL.EFDbContext;
-using OmdbApi.DAL.Helpers;
 using OmdbApi.DAL.Models;
-using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -55,10 +48,10 @@ namespace OmdbApi.Test.IntegrationTests
 
             // Asserts
             Assert.NotNull(movieResponse);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(movieResponse.Response, true);
             Assert.Equal(movieResponse.Error, null);
             Assert.Equal(movieResponse.Title, titleParam);
-
         }
 
         [Fact]
@@ -78,7 +71,7 @@ namespace OmdbApi.Test.IntegrationTests
             // Asserts
             Assert.NotNull(movieResponse);
             Assert.Equal(movieResponse.Response, false);
-            Assert.Equal(response.StatusCode, HttpStatusCode.BadRequest);
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
             Assert.NotEqual(movieResponse.Error, null);
         }
 

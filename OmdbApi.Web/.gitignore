@@ -28,6 +28,9 @@ Obj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
+/wwwroot/dist/
+
+/yarn.lock
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -41,6 +44,9 @@ TestResult.xml
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
+
+# DNX
+artifacts/
 
 *_i.c
 *_p.c
