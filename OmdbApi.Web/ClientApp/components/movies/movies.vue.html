@@ -7,11 +7,11 @@
                         <h5 class="card-title text-center">Search Any Movie</h5>
                         <form class="form-signin">
                             <div class="form-label-group">
-                                <input type="text" id="search" class="form-control" placeholder="Search" required autofocus>
+                                <input type="search" id="search" v-model="term" class="form-control" placeholder="Search" required autofocus>
                                 <label for="search">Search Movie</label>
                             </div>
 
-                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Search</button>
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" @click="searchMovie()">Search</button>
                             <hr class="my-4">
                            
                         </form>

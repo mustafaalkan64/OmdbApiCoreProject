@@ -38,21 +38,17 @@ export default class MoviesComponent extends Vue {
         poster : "",
         error: ""
     };
+    term: string = "";
+
+    searchMovie() {
+        return this.getMovie();
+    }
 
     getMovie() {
-        var config = {
-            headers: {
-                'Authorization': "bearer " + this.token,
-                'Content-Type': 'application/json'
-            }
-        };
-
-        var bodyParameters = {
-            title: "avengers"
-        }
+        console.log(this.term);
         axios({
             method: 'get',
-            url: apiService.API_URL + '/api/Movie/SearchMovie?title=avengers',
+            url: apiService.API_URL + '/api/Movie/SearchMovie?title=' + this.term,
             headers: {
                 Authorization: 'Bearer ' + this.token,
                 'Content-Type': 'application/json'
