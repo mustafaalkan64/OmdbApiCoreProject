@@ -1,29 +1,51 @@
 <template>
-    <div>
-        <h1>{{ movie.title }}</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Search Any Movie</h5>
+                        <form class="form-signin">
+                            <div class="form-label-group">
+                                <input type="text" id="search" class="form-control" placeholder="Search" required autofocus>
+                                <label for="search">Search Movie</label>
+                            </div>
 
-        <p> <b>Year   :</b>  {{ movie.year }}</p>
-        <p> <b>Rated  :</b> {{ movie.rated }}</p>
-        <p> <b>Actors :</b> {{ movie.actors }}</p>
-        <p> <b>Awards :</b> {{ movie.awards }}</p>
-        <img v-bind:src="movie.poster" />
-        <table v-if="movie.ratings.length" class="table">
-            <thead>
-                <tr>
-                    <th>Ratings</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in movie.ratings">
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.source }}</td>
-                    <td>{{ item.value }}</td>
-                </tr>
-            </tbody>
-        </table>
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Search</button>
+                            <hr class="my-4">
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h1>{{ movie.title }}</h1>
 
-        <p v-else><em>Loading...</em></p>
+            <p> <b>Year   :</b>  {{ movie.year }}</p>
+            <p> <b>Rated  :</b> {{ movie.rated }}</p>
+            <p> <b>Actors :</b> {{ movie.actors }}</p>
+            <p> <b>Awards :</b> {{ movie.awards }}</p>
+            <img v-bind:src="movie.poster" />
+            <table v-if="movie.ratings.length" class="table">
+                <thead>
+                    <tr>
+                        <th>Ratings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in movie.ratings">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.source }}</td>
+                        <td>{{ item.value }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p v-else><em>Loading...</em></p>
+        </div>
     </div>
+
 </template>
 
 <script src="./movies.ts"></script>
