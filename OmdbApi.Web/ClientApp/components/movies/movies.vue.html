@@ -1,0 +1,29 @@
+<template>
+    <div>
+        <h1>{{ movie.title }}</h1>
+
+        <p> <b>Year   :</b>  {{ movie.year }}</p>
+        <p> <b>Rated  :</b> {{ movie.rated }}</p>
+        <p> <b>Actors :</b> {{ movie.actors }}</p>
+        <p> <b>Awards :</b> {{ movie.awards }}</p>
+        <img v-bind:src="movie.poster" />
+        <table v-if="movie.ratings.length" class="table">
+            <thead>
+                <tr>
+                    <th>Ratings</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in movie.ratings">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.source }}</td>
+                    <td>{{ item.value }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p v-else><em>Loading...</em></p>
+    </div>
+</template>
+
+<script src="./movies.ts"></script>
