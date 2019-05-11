@@ -156,11 +156,11 @@ namespace OmdbApi.Business.Services
             
         }
 
-        public async Task<MovieCollectionResponse> SearchMovie(string title, int? year)
+        public async Task<MovieCollectionResponse> SearchMovie(string term, int? year)
         {
             try
             {
-                string key = $"?s={title}";
+                string key = $"?s={term}";
                 if (year != null)
                     key += $"&y={year}";
                 string obj;
@@ -172,11 +172,11 @@ namespace OmdbApi.Business.Services
                         // Keep in cache for this time, reset time if accessed.
                         .SetSlidingExpiration(TimeSpan.FromMinutes(12));
 
-                    var resultFromDb = await GetMoviesFromDb(title, year);
+                    var resultFromDb = await GetMoviesFromDb(term, year);
                     if (!resultFromDb.Any())
                     {
                         
-                        var result = await GetFromOmdbApi(title, year);
+                        var result = await GetFromOmdbApi(term, year);
                         var response = result.Response;
                         var movieCollection = new MovieCollectionResponse();
                         if (response)
@@ -240,7 +240,7 @@ namespace OmdbApi.Business.Services
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Exception Error Searching Any Movie", title);
+                _logger.LogError(e, "Exception Error Searching Any Movie", term);
                 throw e;
             }
         }

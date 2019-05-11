@@ -24,11 +24,11 @@ namespace OmdbApi.Api.Controllers
         }
 
         [HttpGet("SearchMovie")]
-        public async Task<IActionResult> SearchMovie(string title, int? year)
+        public async Task<IActionResult> SearchMovie(string term, int? year)
         {
             try
             {
-                var movieResult = await _movieService.SearchMovie(title, year);
+                var movieResult = await _movieService.SearchMovie(term, year);
                 if (movieResult == null)
                     return NotFound();
                 if (movieResult.Response == false)
