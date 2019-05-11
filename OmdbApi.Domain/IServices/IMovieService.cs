@@ -8,12 +8,13 @@ namespace OmdbApi.Domain.IServices
     public interface IMovieService
     {
         Task AddMovie(Movie entity);
-        Task<MovieResponse> GetFromOmdbApi(string title, int? year);
+        Task<MovieCollectionResponse> GetFromOmdbApi(string title, int? year);
         Task<MovieResponse> GetFromOmdbApiByImdbId(string imdbId);
         Task<Movie> GetFromDb(string title, int? year);
         Task AddRating(Rating rating);
         Task Commit();
         Task UpdateAllMovies();
-        Task<MovieResponse> SearchMovie(string title, int? year);
+        Task<MovieCollectionResponse> SearchMovie(string title, int? year);
+        Task<IEnumerable<Movie>> GetMoviesFromDb(string title, int? year);
     }
 }

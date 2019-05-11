@@ -11,6 +11,7 @@ namespace OmdbApi.DAL.EFDbContext
         public string Source { get; set; }
         public string Value { get; set; }
         public int MovieId { get; set; }
+        public string ImdbId { get; set; }
         //public Movie Movie { get; set; }
     }
 }

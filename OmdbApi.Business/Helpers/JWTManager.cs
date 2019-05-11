@@ -30,7 +30,7 @@ namespace OmdbApi.Business.Helpers
                 issuer: "https://github.com/mustafaalkan64/OmdbApiCoreProject",
                 audience: "https://github.com/mustafaalkan64/OmdbApiCoreProject",
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddMinutes(90),
                 signingCredentials: creds);
 
             var usertoken = new JwtSecurityTokenHandler().WriteToken(token);

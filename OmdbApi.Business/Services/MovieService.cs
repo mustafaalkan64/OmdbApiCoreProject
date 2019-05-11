@@ -8,6 +8,8 @@ using OmdbApi.DAL.Models;
 using OmdbApi.DAL.Uow;
 using OmdbApi.Domain.IServices;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -54,7 +56,16 @@ namespace OmdbApi.Business.Services
 
         public async Task AddRating(Rating rating)
         {
-            await _uow.RatingRepository.Add(rating);
+            try
+            {
+                await _uow.RatingRepository.Add(rating);
+                await _uow.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task Commit()
@@ -68,24 +79,24 @@ namespace OmdbApi.Business.Services
         /// <param name="title">Title Param</param>
         /// <param name="year">Year Param</param>
         /// <returns></returns>
-        public async Task<MovieResponse> GetFromOmdbApi(string title, int? year)
+        public async Task<MovieCollectionResponse> GetFromOmdbApi(string s, int? year)
         {
             var apikey = _configuration.GetValue<string>("omdbapikey");
             string URL = "http://www.omdbapi.com/";
-            string urlParameters = $"?t={title}&plot=full&apikey={apikey}";
+            string urlParameters = $"?s={s}&apikey={apikey}&type=movie&Content-Type=application/json";
             if(year != null)
                 urlParameters += $"&y={year}";
 
-            return await GetMovieFromWebClient(URL, urlParameters);             
+            return await GetMovieCollectionFromWebClient(URL, urlParameters);             
         }
 
         public async Task<MovieResponse> GetFromOmdbApiByImdbId(string imdbId)
         {
             var apikey = _configuration.GetValue<string>("omdbapikey");
             string URL = "http://www.omdbapi.com/";
-            string urlParameters = $"?i={imdbId}&plot=full&apikey={apikey}";
+            string urlParameters = $"?i={imdbId}&apikey={apikey}&type=movie&Content-Type=application/json";
 
-            return await GetMovieFromWebClient(URL, urlParameters);
+            return await GetMovieDetailFromWebClient(URL, urlParameters);
         }
 
         /// <summary>
@@ -97,6 +108,11 @@ namespace OmdbApi.Business.Services
         public async Task<Movie> GetFromDb(string title, int? year)
         {
             return await _uow.MovieRepository.FindBy((x => x.Title.Contains(title) || x.Year.Equals(year.ToString())), a => a.Ratings);
+        }
+
+        public async Task<IEnumerable<Movie>> GetMoviesFromDb(string title, int? year)
+        {
+            return await _uow.MovieRepository.SearchBy((x => x.Title.Contains(title) || x.Year.Equals(year.ToString())), a => a.Ratings);
         }
 
         public async Task UpdateAllMovies()
@@ -140,11 +156,13 @@ namespace OmdbApi.Business.Services
             
         }
 
-        public async Task<MovieResponse> SearchMovie(string title, int? year)
+        public async Task<MovieCollectionResponse> SearchMovie(string title, int? year)
         {
             try
             {
-                string key = $"?title={title}&year={year}";
+                string key = $"?s={title}";
+                if (year != null)
+                    key += $"&y={year}";
                 string obj;
                 // Check Cache 
                 if (!_cache.TryGetValue(key, out obj))
@@ -154,49 +172,64 @@ namespace OmdbApi.Business.Services
                         // Keep in cache for this time, reset time if accessed.
                         .SetSlidingExpiration(TimeSpan.FromMinutes(12));
 
-                    var resultFromDb = await GetFromDb(title, year);
-                    if (resultFromDb == null)
+                    var resultFromDb = await GetMoviesFromDb(title, year);
+                    if (!resultFromDb.Any())
                     {
                         
-                        var movie = await GetFromOmdbApi(title, year);
-                        var response = movie.Response;
+                        var result = await GetFromOmdbApi(title, year);
+                        var response = result.Response;
                         if (response)
                         {
-                            await AddMovie(movie);
-                            int movieId = movie.Id;
-
-                            // Add Ratings That Belong The Movie
-                            var ratings = movie.Ratings;
-                            foreach (var rating in ratings)
+                            foreach (var movie in result.Search)
                             {
-                                rating.MovieId = movieId;
-                                await AddRating(rating);
+                                await Task.Run(async () =>
+                                {
+                                     var _movie = await GetFromOmdbApiByImdbId(movie.imdbID);
+                                     await _uow.MovieRepository.Add(_movie);
+                                     //int movieId = _movie.Id;
+
+                                     // Add Ratings That Belong The Movie
+                                     var ratings = _movie.Ratings;
+                                     foreach (var rating in ratings)
+                                     {
+                                        rating.ImdbId = _movie.imdbID;
+                                        await _uow.RatingRepository.Add(rating);
+                                     }
+                                    _logger.LogInformation("Movie Create Operation Is Succesfull", movie);
+                                 });
+                                await Commit();
                             }
-                            await Commit();
-                            _logger.LogInformation("Movie Create Operation Is Succesfull", movie);
-                            
-                            // Set Cache With Object That Comes Omdb Api
-                            obj = JsonConvert.SerializeObject(movie);
-                            _cache.Set(key, obj, cacheEntryOptions);
                         }
-                        return movie;
+                        // Set Cache With Object That Comes Omdb Api
+                        obj = JsonConvert.SerializeObject(result);
+                        _cache.Set(key, obj, cacheEntryOptions);
+                        return result;
                     }
                     else
                     {
                         // Set Cache With Object That Comes From Db
                         obj = JsonConvert.SerializeObject(resultFromDb);
                         _cache.Set(key, obj, cacheEntryOptions);
-                        var movieResponse = _mapper.Map<MovieResponse>(resultFromDb);
-                        movieResponse.Response = true;
-                        movieResponse.Error = null;
-                        return movieResponse;
+                        var movieCollection = new MovieCollectionResponse();
+                        foreach (var movie in resultFromDb)
+                        {
+                            var movieResponse = _mapper.Map<MovieResponse>(movie);
+                            movieResponse.Response = true;
+                            movieResponse.Error = null;
+                            movieCollection.Search.ToList().Add(movieResponse);
+                        }
+                        movieCollection.Response = true;
+                        movieCollection.Error = null;
+                        movieCollection.TotalResults = resultFromDb.ToList().Count;
+
+                        return movieCollection;
                     }
                 }
                 else
                 {
                     // Get From Cache With Key
                     string _cachedData = _cache.Get<string>(key);
-                    var model = JsonConvert.DeserializeObject<MovieResponse>(_cachedData);
+                    var model = JsonConvert.DeserializeObject<MovieCollectionResponse>(_cachedData);
                     return model;
                 }
 
@@ -208,7 +241,33 @@ namespace OmdbApi.Business.Services
             }
         }
 
-        private async Task<MovieResponse> GetMovieFromWebClient(string URL, string urlParameters)
+        private async Task<MovieCollectionResponse> GetMovieCollectionFromWebClient(string URL, string urlParameters)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(URL);
+
+                // Add an Accept header for JSON format.
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // List data response.
+                HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body.
+                    var dataObject = await response.Content.ReadAsAsync<MovieCollectionResponse>();  //Make sure to add a reference to System.Net.Http.Formatting.dll
+                    return dataObject;
+                }
+                else
+                {
+                    //Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                    return null;
+                }
+            }
+        }
+
+        private async Task<MovieResponse> GetMovieDetailFromWebClient(string URL, string urlParameters)
         {
             using (HttpClient client = new HttpClient())
             {
