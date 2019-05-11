@@ -80,4 +80,3 @@ C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.DAL\obj\Debu
 C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.DAL\obj\Debug\netcoreapp2.1\OmdbApi.DAL.dll
 C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.DAL\obj\Debug\netcoreapp2.1\OmdbApi.DAL.pdb
 C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.DAL\obj\Debug\netcoreapp2.1\OmdbApi.DAL.csproj.CopyComplete
-C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.DAL\obj\Debug\netcoreapp2.1\OmdbApi.DAL.csprojAssemblyReference.cache

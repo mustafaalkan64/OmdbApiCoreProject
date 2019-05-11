@@ -178,6 +178,7 @@ namespace OmdbApi.Business.Services
                         
                         var result = await GetFromOmdbApi(title, year);
                         var response = result.Response;
+                        var movieCollection = new MovieCollectionResponse();
                         if (response)
                         {
                             foreach (var movie in result.Search)
@@ -186,7 +187,6 @@ namespace OmdbApi.Business.Services
                                 {
                                      var _movie = await GetFromOmdbApiByImdbId(movie.imdbID);
                                      await _uow.MovieRepository.Add(_movie);
-                                     //int movieId = _movie.Id;
 
                                      // Add Ratings That Belong The Movie
                                      var ratings = _movie.Ratings;
@@ -195,33 +195,37 @@ namespace OmdbApi.Business.Services
                                         rating.ImdbId = _movie.imdbID;
                                         await _uow.RatingRepository.Add(rating);
                                      }
+                                    movieCollection.Search.ToList().Add(_movie);
                                     _logger.LogInformation("Movie Create Operation Is Succesfull", movie);
                                  });
                                 await Commit();
                             }
                         }
+                        movieCollection.Response = true;
+                        movieCollection.TotalResults = result.TotalResults;
                         // Set Cache With Object That Comes Omdb Api
-                        obj = JsonConvert.SerializeObject(result);
+                        obj = JsonConvert.SerializeObject(movieCollection);
                         _cache.Set(key, obj, cacheEntryOptions);
-                        return result;
+                        return movieCollection;
                     }
                     else
                     {
-                        // Set Cache With Object That Comes From Db
-                        obj = JsonConvert.SerializeObject(resultFromDb);
-                        _cache.Set(key, obj, cacheEntryOptions);
+                        
                         var movieCollection = new MovieCollectionResponse();
+                        var movieList = new List<Movie>();
                         foreach (var movie in resultFromDb)
                         {
                             var movieResponse = _mapper.Map<MovieResponse>(movie);
                             movieResponse.Response = true;
-                            movieResponse.Error = null;
-                            movieCollection.Search.ToList().Add(movieResponse);
+                            movieList.Add(movieResponse);
                         }
+                        movieCollection.Search = movieList;
                         movieCollection.Response = true;
-                        movieCollection.Error = null;
                         movieCollection.TotalResults = resultFromDb.ToList().Count;
 
+                        // Set Cache With Object That Comes From Db
+                        obj = JsonConvert.SerializeObject(movieCollection);
+                        _cache.Set(key, obj, cacheEntryOptions);
                         return movieCollection;
                     }
                 }
