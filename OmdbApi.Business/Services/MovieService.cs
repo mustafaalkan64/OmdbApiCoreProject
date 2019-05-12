@@ -94,27 +94,22 @@ namespace OmdbApi.Business.Services
             return await GetMovieDetailFromWebClient(URL, urlParameters);
         }
 
-        /// <summary>
-        /// // Get Movie Data From Db With Title or Year
-        /// </summary>
-        /// <param name="title"></param>
-        /// <param name="year"></param>
-        /// <returns></returns>
-        public async Task<Movie> GetFromDb(string title, int? year)
+        public async Task<IEnumerable<Movie>> GetMoviesFromDb(string term, int? year)
         {
+            var result = await _uow.MovieRepository
+                .SearchBy((x => x.Title.Contains(term) ||
+                x.Actors.Contains(term) || 
+                x.Awards.Contains(term) || 
+                x.Website.Contains(term) || 
+                x.Director.Contains(term) ||
+                x.Plot.Contains(term) || 
+                x.Genre.Contains(term) ||
+                x.Production.Contains(term)), a => a.Ratings);
+
             if (year != null)
-                return await _uow.MovieRepository.FindBy((x => x.Title.Contains(title) && x.Year.Equals(year.ToString())), a => a.Ratings);
-            else
-                return await _uow.MovieRepository.FindBy((x => x.Title.Contains(title)), a => a.Ratings);
-        }
+                result = result.Where(a => a.Year.Equals(year.ToString())).ToList();
 
-        public async Task<IEnumerable<Movie>> GetMoviesFromDb(string title, int? year)
-        {
-            if(year != null)
-                return await _uow.MovieRepository.SearchBy((x => x.Title.Contains(title) && x.Year.Equals(year.ToString())), a => a.Ratings);
-            else
-                return await _uow.MovieRepository.SearchBy((x => x.Title.Contains(title)), a => a.Ratings);
-
+            return result;
         }
 
 
@@ -273,7 +268,7 @@ namespace OmdbApi.Business.Services
                 {
                     var movieResponse = new MovieResponse()
                     {
-                        Error = "ImdbId Can not Be Empty",
+                        Error = "Imdb Id Can not Be Empty",
                         Response = false
                     };
 

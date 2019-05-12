@@ -10,7 +10,6 @@ namespace OmdbApi.Domain.IServices
         Task AddMovie(Movie entity);
         Task<MovieCollectionResponse> GetFromOmdbApi(string title, int? year);
         Task<MovieResponse> GetFromOmdbApiByImdbId(string imdbId);
-        Task<Movie> GetFromDb(string title, int? year);
         Task AddRating(Rating rating);
         Task UpdateAllMovies();
         Task<MovieCollectionResponse> SearchMovie(string title, int? year);
