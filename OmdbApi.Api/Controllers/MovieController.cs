@@ -10,7 +10,7 @@ using OmdbApi.Domain.IServices;
 
 namespace OmdbApi.Api.Controllers
 {
-    [Authorize(Roles = RoleType.User)]
+    //[Authorize(Roles = RoleType.User)]
     [Route("api/[controller]")]
     [ApiController]
     public class MovieController : ControllerBase
@@ -29,6 +29,24 @@ namespace OmdbApi.Api.Controllers
             try
             {
                 var movieResult = await _movieService.SearchMovie(term, year);
+                if (movieResult == null)
+                    return NotFound();
+                if (movieResult.Response == false)
+                    return BadRequest(movieResult);
+                return Ok(movieResult);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("SearchMovieByImdbId")]
+        public async Task<IActionResult> SearchMovieByImdbId(string imdbId)
+        {
+            try
+            {
+                var movieResult = await _movieService.SearchMovieByImdbId(imdbId);
                 if (movieResult == null)
                     return NotFound();
                 if (movieResult.Response == false)

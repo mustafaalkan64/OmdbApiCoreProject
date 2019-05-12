@@ -51,7 +51,7 @@ export default class MoviesComponent extends Vue {
         totalResult: 10
     };
     loading: boolean = true;
-    term: string = "spider";
+    term: string = "";
     noData: boolean = false;
 
     searchMovie() {

@@ -61,16 +61,11 @@ namespace OmdbApi.Business.Services
                 await _uow.RatingRepository.Add(rating);
                 await _uow.Commit();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                _logger.LogError(e, "Exception Error During Add Rating", rating);
+                throw e;
             }
-
-        }
-
-        public async Task Commit()
-        {
-            await _uow.Commit();
         }
 
         /// <summary>
@@ -122,6 +117,11 @@ namespace OmdbApi.Business.Services
 
         }
 
+
+        /// <summary>
+        /// Update All Movies In Movies Table According to Omdb Api Resource
+        /// </summary>
+        /// <returns></returns>
         public async Task UpdateAllMovies()
         {
             try
@@ -163,6 +163,12 @@ namespace OmdbApi.Business.Services
             
         }
 
+        /// <summary>
+        /// Search Movie By Term and Year params From Omdb Api, After Insert to Movies and Rating Table 
+        /// </summary>
+        /// <param name="term"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         public async Task<MovieCollectionResponse> SearchMovie(string term, int? year)
         {
             try
@@ -177,7 +183,7 @@ namespace OmdbApi.Business.Services
                     // Set cache options.
                     var cacheEntryOptions = new MemoryCacheEntryOptions()
                         // Keep in cache for this time, reset time if accessed.
-                        .SetSlidingExpiration(TimeSpan.FromMinutes(12));
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(20));
 
                     var resultFromDb = await GetMoviesFromDb(term, year);
                     if (!resultFromDb.Any())
@@ -205,7 +211,7 @@ namespace OmdbApi.Business.Services
                                     movieCollection.Search.ToList().Add(_movie);
                                     _logger.LogInformation("Movie Create Operation Is Succesfull", movie);
                                  });
-                                await Commit();
+                                await _uow.Commit();
                             }
                         }
                         movieCollection.Response = true;
@@ -250,6 +256,72 @@ namespace OmdbApi.Business.Services
             {
                 _logger.LogError(e, "Exception Error Searching Any Movie", term);
                 throw e;
+            }
+        }
+
+
+        /// <summary>
+        /// Search Movies By ImdbId
+        /// </summary>
+        /// <param name="imdbId"></param>
+        /// <returns></returns>
+        public async Task<MovieResponse> SearchMovieByImdbId(string imdbId)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(imdbId))
+                {
+                    var movieResponse = new MovieResponse()
+                    {
+                        Error = "ImdbId Can not Be Empty",
+                        Response = false
+                    };
+
+                    return await Task.Run(() => movieResponse).ConfigureAwait(false);
+                }
+
+                string key = $"?i={imdbId}";
+                string obj;
+                // Check Cache 
+                if (!_cache.TryGetValue(key, out obj))
+                {
+
+                    var _movieFromDb = await _uow.MovieRepository.FindBy(x => x.imdbID.Equals(imdbId));
+                    if(_movieFromDb == null)
+                    {
+                        var _movieFromOmdb = await GetFromOmdbApiByImdbId(imdbId);
+                        return _movieFromOmdb;
+                    }
+                    var movieResponse = _mapper.Map<MovieResponse>(_movieFromDb);
+                    movieResponse.Response = true;
+
+                    // Set Cache With Object That Comes From Db
+                    // Set cache options.
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    // Keep in cache for this time, reset time if accessed.
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(20));
+
+                    obj = JsonConvert.SerializeObject(movieResponse);
+                    _cache.Set(key, obj, cacheEntryOptions);
+
+                    return movieResponse;
+                }
+                else
+                {
+                    string _cachedData = _cache.Get<string>(key);
+                    var model = JsonConvert.DeserializeObject<MovieResponse>(_cachedData);
+                    return model;
+                }
+            }
+            catch(Exception ex)
+            {
+                var movieResponse = new MovieResponse()
+                {
+                    Error = ex.Message,
+                    Response = false
+                };
+
+                return await Task.Run(() => movieResponse).ConfigureAwait(false);
             }
         }
 
