@@ -13,21 +13,23 @@
 
                             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" @click="searchMovie()">Search</button>
                             <hr class="my-4">
-                           
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <h1>{{ movie.title }}</h1>
+        <div class="row" v-if="wholeResponse.length">
+            <div v-for="movie in wholeResponse">
+                <h1>{{ movie.title }}</h1>
+                <p> <b>Year   :</b>  {{ movie.year }}</p>
+                <p> <b>Rated  :</b> {{ movie.rated }}</p>
+                <p> <b>Actors :</b> {{ movie.actors }}</p>
+                <p> <b>Awards :</b> {{ movie.awards }}</p>
+                <img v-bind:src="movie.poster" />
+            </div>
 
-            <p> <b>Year   :</b>  {{ movie.year }}</p>
-            <p> <b>Rated  :</b> {{ movie.rated }}</p>
-            <p> <b>Actors :</b> {{ movie.actors }}</p>
-            <p> <b>Awards :</b> {{ movie.awards }}</p>
-            <img v-bind:src="movie.poster" />
-            <table v-if="movie.ratings.length" class="table">
+            <!--<table v-if="movie.ratings.length" class="table">
                 <thead>
                     <tr>
                         <th>Ratings</th>
@@ -40,11 +42,58 @@
                         <td>{{ item.value }}</td>
                     </tr>
                 </tbody>
-            </table>
+            </table>-->
 
-            <p v-else><em>Loading...</em></p>
         </div>
+        <div v-else>
+            <p><em>Loading...</em></p>
+        </div>         
     </div>
+
+
+    <!--<v-container v-if="loading">
+        <div class="text-xs-center">
+            <v-progress-circular indeterminate
+                                 :size="150"
+                                 :width="8"
+                                 color="green">
+            </v-progress-circular>
+            <h2>No Movie in API with </h2>
+        </div>
+    </v-container>
+
+    <v-container v-else-if="noData">
+        <div class="text-xs-center">
+            <h2>No Movie in API with </h2>
+        </div>
+    </v-container>
+
+    <v-container v-else grid-list-xl>
+        <v-layout wrap>
+            <v-flex xs4
+                    v-for="(item, index) in wholeResponse"
+                    :key="index"
+                    mb-2>
+                <v-card>
+                    <v-img :src="item.Poster"
+                           aspect-ratio="1"></v-img>
+                    <v-card-title primary-title>
+                        <div>
+                            <h2>{{item.Title}}</h2>
+                            <div>Year: {{item.Year}}</div>
+                            <div>Type: {{item.Type}}</div>
+                            <div>IMDB-id: {{item.imdbID}}</div>
+                        </div>
+                    </v-card-title>
+                    <v-card-actions class="justify-center">
+                        <v-btn flat
+                               color="green"
+                               @click="singleMovie(item.imdbID)">View</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </v-container>-->
 
 </template>
 

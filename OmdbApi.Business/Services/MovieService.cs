@@ -107,12 +107,19 @@ namespace OmdbApi.Business.Services
         /// <returns></returns>
         public async Task<Movie> GetFromDb(string title, int? year)
         {
-            return await _uow.MovieRepository.FindBy((x => x.Title.Contains(title) || x.Year.Equals(year.ToString())), a => a.Ratings);
+            if (year != null)
+                return await _uow.MovieRepository.FindBy((x => x.Title.Contains(title) && x.Year.Equals(year.ToString())), a => a.Ratings);
+            else
+                return await _uow.MovieRepository.FindBy((x => x.Title.Contains(title)), a => a.Ratings);
         }
 
         public async Task<IEnumerable<Movie>> GetMoviesFromDb(string title, int? year)
         {
-            return await _uow.MovieRepository.SearchBy((x => x.Title.Contains(title) || x.Year.Equals(year.ToString())), a => a.Ratings);
+            if(year != null)
+                return await _uow.MovieRepository.SearchBy((x => x.Title.Contains(title) && x.Year.Equals(year.ToString())), a => a.Ratings);
+            else
+                return await _uow.MovieRepository.SearchBy((x => x.Title.Contains(title)), a => a.Ratings);
+
         }
 
         public async Task UpdateAllMovies()
@@ -203,6 +210,7 @@ namespace OmdbApi.Business.Services
                         }
                         movieCollection.Response = true;
                         movieCollection.TotalResults = result.TotalResults;
+                        
                         // Set Cache With Object That Comes Omdb Api
                         obj = JsonConvert.SerializeObject(movieCollection);
                         _cache.Set(key, obj, cacheEntryOptions);

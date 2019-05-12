@@ -31,7 +31,7 @@ namespace OmdbApi.Api.Controllers
                 if (!result.Status)
                     return BadRequest(new { message = result.Response });
 
-                return Ok(result.Response);
+                return Ok(result);
             }
             catch (Exception ex)
             {
