@@ -11,7 +11,7 @@ namespace OmdbApi.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class UserController : BaseController
     {
         private IUserService _userService;
 
@@ -50,7 +50,7 @@ namespace OmdbApi.Api.Controllers
                 if (!response.Status)
                     return BadRequest(new { message = response.Response });
 
-                return Ok(response.Response);
+                return Ok(response);
             }
             catch (Exception ex)
             {
@@ -59,16 +59,12 @@ namespace OmdbApi.Api.Controllers
         }
 
         [Authorize(Roles = RoleType.User)]
-        [AllowAnonymous]
         [HttpPost("changepasssword")]
         public async Task<IActionResult> ChangePassword([FromBody]ChangePasswordModel changePasswordModel)
         {
             try
             {
-                var claimsIdentity = this.User.Identity as ClaimsIdentity;
-                var userId = int.Parse(claimsIdentity.FindFirst(StaticVariables.UserId)?.Value);
-
-                changePasswordModel.UserId = userId;
+                changePasswordModel.UserId = GetUserId();
                 var response = await _userService.ChangePassword(changePasswordModel);
                 if (response == null)
                     return NotFound("User Not Found");
