@@ -8,3 +8,4 @@ C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.DAL\obj\Debug\net
 C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.DAL\obj\Debug\netcoreapp2.1\OmdbApi.DAL.AssemblyInfo.cs
 C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.DAL\obj\Debug\netcoreapp2.1\OmdbApi.DAL.dll
 C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.DAL\obj\Debug\netcoreapp2.1\OmdbApi.DAL.pdb
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.DAL\obj\Debug\netcoreapp2.1\OmdbApi.DAL.csprojAssemblyReference.cache

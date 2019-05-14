@@ -160,7 +160,6 @@
       },
       "OmdbApi.Domain/1.0.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": "2.1.0",
           "OmdbApi.DAL": "1.0.0"
         },
         "runtime": {
