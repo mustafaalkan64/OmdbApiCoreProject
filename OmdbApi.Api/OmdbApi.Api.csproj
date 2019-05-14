@@ -34,7 +34,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <ProjectReference Include="..\OmdbApi.Business\OmdbApi.Business.csproj" />
-    <ProjectReference Include="..\OmdbApi.DALL\OmdbApi.DAL.csproj" />
+    <ProjectReference Include="..\OmdbApi.DAL\OmdbApi.DAL.csproj" />
     <ProjectReference Include="..\OmdbApi.Domain\OmdbApi.Domain.csproj" />
   </ItemGroup>
 

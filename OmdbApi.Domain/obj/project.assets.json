@@ -12190,8 +12190,8 @@
     },
     "OmdbApi.DAL/1.0.0": {
       "type": "project",
-      "path": "../OmdbApi.DALL/OmdbApi.DAL.csproj",
-      "msbuildProject": "../OmdbApi.DALL/OmdbApi.DAL.csproj"
+      "path": "../OmdbApi.DAL/OmdbApi.DAL.csproj",
+      "msbuildProject": "../OmdbApi.DAL/OmdbApi.DAL.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -12232,8 +12232,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\mustafa.alkan\\source\\repos\\OmdbApiCoreProject\\OmdbApi.DALL\\OmdbApi.DAL.csproj": {
-              "projectPath": "C:\\Users\\mustafa.alkan\\source\\repos\\OmdbApiCoreProject\\OmdbApi.DALL\\OmdbApi.DAL.csproj"
+            "C:\\Users\\mustafa.alkan\\source\\repos\\OmdbApiCoreProject\\OmdbApi.DAL\\OmdbApi.DAL.csproj": {
+              "projectPath": "C:\\Users\\mustafa.alkan\\source\\repos\\OmdbApiCoreProject\\OmdbApi.DAL\\OmdbApi.DAL.csproj"
             }
           }
         }

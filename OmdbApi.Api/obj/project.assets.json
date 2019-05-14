@@ -13266,8 +13266,8 @@
     },
     "OmdbApi.DAL/1.0.0": {
       "type": "project",
-      "path": "../OmdbApi.DALL/OmdbApi.DAL.csproj",
-      "msbuildProject": "../OmdbApi.DALL/OmdbApi.DAL.csproj"
+      "path": "../OmdbApi.DAL/OmdbApi.DAL.csproj",
+      "msbuildProject": "../OmdbApi.DAL/OmdbApi.DAL.csproj"
     },
     "OmdbApi.Domain/1.0.0": {
       "type": "project",
@@ -13326,8 +13326,8 @@
             "C:\\Users\\mustafa.alkan\\source\\repos\\OmdbApiCoreProject\\OmdbApi.Business\\OmdbApi.Business.csproj": {
               "projectPath": "C:\\Users\\mustafa.alkan\\source\\repos\\OmdbApiCoreProject\\OmdbApi.Business\\OmdbApi.Business.csproj"
             },
-            "C:\\Users\\mustafa.alkan\\source\\repos\\OmdbApiCoreProject\\OmdbApi.DALL\\OmdbApi.DAL.csproj": {
-              "projectPath": "C:\\Users\\mustafa.alkan\\source\\repos\\OmdbApiCoreProject\\OmdbApi.DALL\\OmdbApi.DAL.csproj"
+            "C:\\Users\\mustafa.alkan\\source\\repos\\OmdbApiCoreProject\\OmdbApi.DAL\\OmdbApi.DAL.csproj": {
+              "projectPath": "C:\\Users\\mustafa.alkan\\source\\repos\\OmdbApiCoreProject\\OmdbApi.DAL\\OmdbApi.DAL.csproj"
             },
             "C:\\Users\\mustafa.alkan\\source\\repos\\OmdbApiCoreProject\\OmdbApi.Domain\\OmdbApi.Domain.csproj": {
               "projectPath": "C:\\Users\\mustafa.alkan\\source\\repos\\OmdbApiCoreProject\\OmdbApi.Domain\\OmdbApi.Domain.csproj"
