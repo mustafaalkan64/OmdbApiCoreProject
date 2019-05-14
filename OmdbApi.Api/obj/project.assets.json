@@ -13277,7 +13277,6 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-      "AutoMapper >= 8.0.0",
       "Hangfire >= 1.7.1",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.1.1",
@@ -13291,9 +13290,6 @@
       "OmdbApi.Business >= 1.0.0",
       "OmdbApi.DAL >= 1.0.0",
       "OmdbApi.Domain >= 1.0.0",
-      "Serilog.AspNetCore >= 2.1.1",
-      "Serilog.Settings.Configuration >= 3.0.1",
-      "Serilog.Sinks.RollingFile >= 3.3.0",
       "Swashbuckle.AspNetCore >= 4.0.1"
     ]
   },
@@ -13348,10 +13344,6 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
-          "AutoMapper": {
-            "target": "Package",
-            "version": "[8.0.0, )"
-          },
           "Hangfire": {
             "target": "Package",
             "version": "[1.7.1, )"
@@ -13397,18 +13389,6 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[2.1.1, )"
-          },
-          "Serilog.AspNetCore": {
-            "target": "Package",
-            "version": "[2.1.1, )"
-          },
-          "Serilog.Settings.Configuration": {
-            "target": "Package",
-            "version": "[3.0.1, )"
-          },
-          "Serilog.Sinks.RollingFile": {
-            "target": "Package",
-            "version": "[3.3.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
