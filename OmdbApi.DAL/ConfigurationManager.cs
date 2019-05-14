@@ -11,7 +11,7 @@ namespace OmdbApi.DAL.Helpers
         {
             AppSetting = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.DAL.json")
+                    .AddJsonFile("appsettings.json")
                     .Build();
         }
     }

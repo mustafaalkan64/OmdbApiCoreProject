@@ -91,7 +91,6 @@ C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\net
 C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.AssemblyInfo.cs
 C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.dll
 C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.pdb
-C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\appsettings.DAL.json
 C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.dll.config
 C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.deps.json
 C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.runtimeconfig.json
