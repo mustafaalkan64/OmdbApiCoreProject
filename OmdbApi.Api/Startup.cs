@@ -23,6 +23,7 @@ using OmdbApi.Domain.IServices;
 using OmdbApi.Business.Services;
 using OmdbApi.DAL.Consts;
 using OmdbApi.DAL.EFDbContext;
+using FluentValidation;
 
 namespace OmdbApi.Api
 {
@@ -70,6 +71,8 @@ namespace OmdbApi.Api
             services.AddMvcCore()
                 .AddAuthorization() // Note - this is on the IMvcBuilder, not the service collection
                 .AddJsonFormatters(options => options.ContractResolver = new CamelCasePropertyNamesContractResolver());
+
+            services.AddTransient<IValidator<UserDto>, Business.Validations.UserValidator>();
 
             var config = new MapperConfiguration(cfg =>
             {
