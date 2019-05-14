@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OmdbApi.Api\OmdbApi.Api.csproj" />
-    <ProjectReference Include="..\OmdbApi.DAL\OmdbApi.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

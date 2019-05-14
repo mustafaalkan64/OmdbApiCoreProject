@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+
     <PackageReference Include="Hangfire" Version="1.7.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.1" />
@@ -33,7 +34,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <ProjectReference Include="..\OmdbApi.Business\OmdbApi.Business.csproj" />
-    <ProjectReference Include="..\OmdbApi.DAL\OmdbApi.DAL.csproj" />
+    <ProjectReference Include="..\OmdbApi.DALL\OmdbApi.DAL.csproj" />
     <ProjectReference Include="..\OmdbApi.Domain\OmdbApi.Domain.csproj" />
   </ItemGroup>
 

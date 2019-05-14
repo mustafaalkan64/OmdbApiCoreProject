@@ -81,3 +81,28 @@ C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.Api\bin\Debu
 C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Business.pdb
 C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Domain.pdb
 C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.Api\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.csprojAssemblyReference.cache
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.dll.config
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.csproj.CoreCompileInputs.cache
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.RazorAssemblyInfo.cache
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.RazorAssemblyInfo.cs
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.AssemblyInfoInputs.cache
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.AssemblyInfo.cs
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.dll
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.pdb
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\appsettings.DAL.json
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.dll.config
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.deps.json
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.runtimeconfig.json
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.runtimeconfig.dev.json
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.dll
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Api.pdb
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Business.dll
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Domain.dll
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Business.pdb
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.Domain.pdb
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.RazorTargetAssemblyInfo.cache
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\obj\Debug\netcoreapp2.1\OmdbApi.Api.csproj.CopyComplete
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.DAL.dll
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Api\bin\Debug\netcoreapp2.1\OmdbApi.DAL.pdb

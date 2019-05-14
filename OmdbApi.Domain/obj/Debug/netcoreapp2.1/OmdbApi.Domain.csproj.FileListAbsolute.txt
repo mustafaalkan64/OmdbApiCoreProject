@@ -15,3 +15,20 @@ C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.Domain\obj\D
 C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.csproj.CopyComplete
 C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.dll
 C:\Users\Mustafa ALKAN\Documents\GitHub\OmdbApiCoreProject1\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.pdb
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.dll
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.pdb
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\bin\Debug\netcoreapp2.1\OmdbApi.Domain.deps.json
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\bin\Debug\netcoreapp2.1\OmdbApi.Domain.runtimeconfig.json
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\bin\Debug\netcoreapp2.1\OmdbApi.Domain.runtimeconfig.dev.json
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\bin\Debug\netcoreapp2.1\OmdbApi.Domain.dll
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\bin\Debug\netcoreapp2.1\OmdbApi.Domain.pdb
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.csprojAssemblyReference.cache
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.csproj.CoreCompileInputs.cache
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.RazorAssemblyInfo.cache
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.RazorAssemblyInfo.cs
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.AssemblyInfoInputs.cache
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.AssemblyInfo.cs
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.RazorTargetAssemblyInfo.cache
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\obj\Debug\netcoreapp2.1\OmdbApi.Domain.csproj.CopyComplete
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\bin\Debug\netcoreapp2.1\OmdbApi.DAL.dll
+C:\Users\mustafa.alkan\source\repos\OmdbApiCoreProject\OmdbApi.Domain\bin\Debug\netcoreapp2.1\OmdbApi.DAL.pdb
