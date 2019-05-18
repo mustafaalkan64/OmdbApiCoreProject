@@ -1,5 +1,5 @@
 
-# Asp.net Core 2.1 Web Api Framework With OmdbApi
+# Asp.net Core 2.1 Project to Search and Get Movies By 3d Party Omdb Api 
 Framework development course playground.
 
 # Technologies
@@ -16,3 +16,5 @@ Framework development course playground.
 - IOC
 - Hangfire
 - Integration Test
+- VueJs With TypeScript
+- Axios
