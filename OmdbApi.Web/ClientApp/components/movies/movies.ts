@@ -50,7 +50,7 @@ export default class MoviesComponent extends Vue {
         response: true,
         totalResult: 10
     };
-    loading: boolean = true;
+    loading: boolean = false;
     term: string = "";
     noData: boolean = false;
 
@@ -61,7 +61,7 @@ export default class MoviesComponent extends Vue {
     data() {
         return {
             wholeResponse: [],
-            loading: true,
+            loading: false,
             noData: true
         }
     }
@@ -71,6 +71,7 @@ export default class MoviesComponent extends Vue {
         if (this.term.length < 3)
             console.log("En az 3 Karakter");
         else {
+            this.loading = true;
             axios({
                 method: 'get',
                 url: apiService.API_URL + '/api/Movie/SearchMovie?term=' + this.term,
@@ -79,8 +80,6 @@ export default class MoviesComponent extends Vue {
                     'Content-Type': 'application/json'
                 }
             }).then((response: any) => {
-                console.log(response.data);
-                //this.movie = response.data;
                 debugger;
                 if (response.data.response == true) {
                     this.wholeResponse = response.data.search;

@@ -10,6 +10,7 @@ using OmdbApi.Domain.IServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -186,6 +187,7 @@ namespace OmdbApi.Business.Services
                         
                         var result = await GetFromOmdbApi(term, year);
                         var response = result.Response;
+                        var movieList = new List<Movie>();
                         var movieCollection = new MovieCollectionResponse();
                         if (response)
                         {
@@ -203,14 +205,16 @@ namespace OmdbApi.Business.Services
                                         rating.ImdbId = _movie.imdbID;
                                         await _uow.RatingRepository.Add(rating);
                                      }
-                                    movieCollection.Search.ToList().Add(_movie);
                                     _logger.LogInformation("Movie Create Operation Is Succesfull", movie);
-                                 });
+                                    movieList.Add(_movie);
+
+                                });
                                 await _uow.Commit();
                             }
                         }
                         movieCollection.Response = true;
                         movieCollection.TotalResults = result.TotalResults;
+                        movieCollection.Search = movieList;
                         
                         // Set Cache With Object That Comes Omdb Api
                         obj = JsonConvert.SerializeObject(movieCollection);
