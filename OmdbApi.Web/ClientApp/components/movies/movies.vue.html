@@ -19,7 +19,11 @@
                 </div>
             </div>
         </div>
-        <div class="row" v-if="wholeResponse.length">
+
+        <div v-if="loading">
+            <p><em>Loading...</em></p>
+        </div>
+        <div class="row" v-else-if="wholeResponse.length">
             <div v-for="movie in wholeResponse">
                 <h1>{{ movie.title }}</h1>
                 <p> <b>Year   :</b>  {{ movie.year }}</p>
@@ -29,26 +33,10 @@
                 <img v-bind:src="movie.poster" />
                 <button class="btn btn-primary btn-block" type="button" @click="MovieDetail(movie.ImdbId)">Detail</button>
             </div>
-
-            <!--<table v-if="movie.ratings.length" class="table">
-                <thead>
-                    <tr>
-                        <th>Ratings</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="item in movie.ratings">
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.source }}</td>
-                        <td>{{ item.value }}</td>
-                    </tr>
-                </tbody>
-            </table>-->
-
         </div>
-        <div v-else-if="loading">
-            <p><em>Loading...</em></p>
-        </div>         
+        <div class="row" v-else-if="noData">
+            <p>Herhangi Bir Sonuç Bulunamadý</p>
+        </div>
     </div>
 
 </template>

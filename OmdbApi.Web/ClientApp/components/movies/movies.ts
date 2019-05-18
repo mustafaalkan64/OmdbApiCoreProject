@@ -33,7 +33,7 @@ interface ratings {
 @Component
 export default class MoviesComponent extends Vue {
     // token will get from login method
-    token: string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtdXN0YWZhMiIsImp0aSI6IjQzMDZmNDNjLTdlZjYtNDNmZC1iOTk5LTkwMGUxYTY1MDhmMyIsImVtYWlsIjoibXVzdGFmYTJAZ21haWwuY29tIiwiVXNlcklkIjoiNCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlVzZXIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibXVzdGFmYTIiLCJleHAiOjE1NTc2ODA5NDUsImlzcyI6Imh0dHBzOi8vZ2l0aHViLmNvbS9tdXN0YWZhYWxrYW42NC9PbWRiQXBpQ29yZVByb2plY3QiLCJhdWQiOiJodHRwczovL2dpdGh1Yi5jb20vbXVzdGFmYWFsa2FuNjQvT21kYkFwaUNvcmVQcm9qZWN0In0.e3qdaddwD55-1eNO9nTribpfwq2iQu3onHN4e_2wMnk";
+    token: string = localStorage.getItem('token') || '';
     movie: movie = <movie>{
         title: "",
         year: "",
@@ -53,6 +53,7 @@ export default class MoviesComponent extends Vue {
     loading: boolean = false;
     term: string = "";
     noData: boolean = false;
+    $router: any;
 
     searchMovie() {
         return this.getMovie();
@@ -81,8 +82,8 @@ export default class MoviesComponent extends Vue {
                 }
             }).then((response: any) => {
                 debugger;
+                this.wholeResponse = response.data.search;
                 if (response.data.response == true) {
-                    this.wholeResponse = response.data.search;
                     this.loading = false;
                     this.noData = false;
                 }
@@ -94,7 +95,7 @@ export default class MoviesComponent extends Vue {
             .catch((error: any) => {
                 console.log(error);
                 if (error.response && error.response.status === 401) {
-                    window.location.href = "logon";
+                    this.$router.push('logon');;
                 } else {
                     // Handle error however you want
                 }
@@ -103,7 +104,7 @@ export default class MoviesComponent extends Vue {
 
     }
 
-    mounted() {
-        this.getMovie();
-    }
+    //mounted() {
+    //    this.getMovie();
+    //}
 }

@@ -27,15 +27,11 @@ namespace OmdbApi.Api.Controllers
             try
             {
                 var result = await _userService.Authenticate(user);
-
-                if (!result.Status)
-                    return BadRequest(new { message = result.Response });
-
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message });
+                throw ex;
             }
         }
 

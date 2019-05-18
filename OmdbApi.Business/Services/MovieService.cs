@@ -211,15 +211,18 @@ namespace OmdbApi.Business.Services
                                 });
                                 await _uow.Commit();
                             }
+
+                            movieCollection.Response = true;
+                            movieCollection.TotalResults = result.TotalResults;
+                            movieCollection.Search = movieList;
+
+                            // Set Cache With Object That Comes Omdb Api
+                            obj = JsonConvert.SerializeObject(movieCollection);
+                            _cache.Set(key, obj, cacheEntryOptions);
+                            return movieCollection;
                         }
-                        movieCollection.Response = true;
-                        movieCollection.TotalResults = result.TotalResults;
-                        movieCollection.Search = movieList;
-                        
-                        // Set Cache With Object That Comes Omdb Api
-                        obj = JsonConvert.SerializeObject(movieCollection);
-                        _cache.Set(key, obj, cacheEntryOptions);
-                        return movieCollection;
+                        else
+                            return result;
                     }
                     else
                     {
