@@ -88,7 +88,6 @@ export default class MoviesComponent extends Vue {
                     'Content-Type': 'application/json'
                 }
             }).then((response: any) => {
-                debugger;
                 this.wholeResponse = response.data.search;
                 if (response.data.response == true) {
                     this.loading = false;

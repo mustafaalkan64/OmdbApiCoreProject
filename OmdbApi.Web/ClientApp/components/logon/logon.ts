@@ -17,7 +17,9 @@ export default class LogonComponent extends Vue {
         password: ""
     };
     loading: boolean = false;
+    errorstate: boolean = false;
     message: string = "";
+    $router: any;
 
     async Logon() {
 
@@ -31,12 +33,13 @@ export default class LogonComponent extends Vue {
             if (response.data.status == true) {
                 localStorage.setItem('token', response.data.response);
                 this.loading = false;
+                this.errorstate = false;
                 this.$router.push('movies');
             }
             else {
                 this.loading = false;
+                this.errorstate = true;
                 this.message = response.data.response;
-                alert(this.message);
             }
         })
         .catch((error: any) => {
