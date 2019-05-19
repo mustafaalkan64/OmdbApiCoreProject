@@ -15,6 +15,7 @@ interface movie {
     response: boolean;
     poster: string;
     imdbID: string;
+    plot: string;
 }
 
 interface movieCollection {
@@ -44,7 +45,8 @@ export default class MoviesComponent extends Vue {
         response: false,
         poster: "",
         error: "",
-        imdbID: ""
+        imdbID: "",
+        plot: ""
     };
     wholeResponse: movieCollection = <movieCollection>{
         search: [],
@@ -68,7 +70,7 @@ export default class MoviesComponent extends Vue {
         return {
             wholeResponse: [],
             loading: false,
-            noData: true
+            noData: false
         }
     }
 
@@ -97,8 +99,7 @@ export default class MoviesComponent extends Vue {
                     this.loading = false;
                 }
             })
-                .catch((error: any) => {
-                debugger;
+            .catch((error: any) => {
                 console.log(error);
                 if (error.response.status === 401) {
                     this.$router.push('/logon');
