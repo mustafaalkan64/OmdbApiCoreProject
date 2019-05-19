@@ -288,7 +288,7 @@ namespace OmdbApi.Business.Services
                 if (!_cache.TryGetValue(key, out obj))
                 {
 
-                    var _movieFromDb = await _uow.MovieRepository.FindBy(x => x.imdbID.Equals(imdbId));
+                    var _movieFromDb = await _uow.MovieRepository.FindBy(x => x.imdbID.Equals(imdbId), a => a.Ratings);
                     if(_movieFromDb == null)
                     {
                         var _movieFromOmdb = await GetFromOmdbApiByImdbId(imdbId);

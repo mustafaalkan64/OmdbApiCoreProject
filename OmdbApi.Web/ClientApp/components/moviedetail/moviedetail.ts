@@ -17,6 +17,15 @@ interface movie {
     error: string;
     response: boolean;
     poster: string;
+    released: string;
+    runtime: string;
+    director: string;
+    writer: string;
+    plot: string;
+    language: string;
+    country: string;
+    genre: string;
+    imdbRating: string;
 }
 
 
@@ -44,7 +53,16 @@ export default class MovieDetailComponent extends Vue {
         ratings: [],
         response: false,
         poster: "",
-        error: ""
+        error: "",
+        released: "",
+        runtime: "",
+        director: "",
+        writer: "",
+        plot: "",
+        language: "",
+        country: "",
+        genre: "",
+        imdbRating: ""
     };
     $route: any;
 
@@ -75,7 +93,6 @@ export default class MovieDetailComponent extends Vue {
                 }
             })
             .catch((error: any) => {
-                debugger;
                 console.log(error);
                 if (error.response.status === 401) {
                     this.$router.push('/logon');
