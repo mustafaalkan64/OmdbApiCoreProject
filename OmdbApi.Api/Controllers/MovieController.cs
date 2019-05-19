@@ -47,8 +47,6 @@ namespace OmdbApi.Api.Controllers
                 var movieResult = await _movieService.SearchMovieByImdbId(imdbId);
                 if (movieResult == null)
                     return NotFound();
-                if (movieResult.Response == false)
-                    return BadRequest(movieResult);
                 return Ok(movieResult);
             }
             catch (Exception e)

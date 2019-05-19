@@ -31,7 +31,7 @@
                 <p> <b>Actors :</b> {{ movie.actors }}</p>
                 <p> <b>Awards :</b> {{ movie.awards }}</p>
                 <img v-bind:src="movie.poster" />
-                <button class="btn btn-primary btn-block" type="button" @click="MovieDetail(movie.ImdbId)">Detail</button>
+                <button class="btn btn-primary btn-block" type="button" @click="RedirectToDetail(movie.imdbID)">Detail</button>
             </div>
         </div>
         <div class="row" v-else-if="noData">

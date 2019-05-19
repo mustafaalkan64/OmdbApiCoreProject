@@ -14,6 +14,7 @@ interface movie {
     error: string;
     response: boolean;
     poster: string;
+    imdbID: string;
 }
 
 interface movieCollection {
@@ -32,7 +33,6 @@ interface ratings {
 
 @Component
 export default class MoviesComponent extends Vue {
-    // token will get from login method
     token: string = localStorage.getItem('token') || '';
     movie: movie = <movie>{
         title: "",
@@ -43,7 +43,8 @@ export default class MoviesComponent extends Vue {
         ratings: [],
         response: false,
         poster: "",
-        error: ""
+        error: "",
+        imdbID: ""
     };
     wholeResponse: movieCollection = <movieCollection>{
         search: [],
@@ -57,6 +58,10 @@ export default class MoviesComponent extends Vue {
 
     searchMovie() {
         return this.getMovie();
+    }
+
+    RedirectToDetail(imdbid: string) {
+        this.$router.push('/moviedetail/' + imdbid);
     }
 
     data() {
@@ -92,19 +97,14 @@ export default class MoviesComponent extends Vue {
                     this.loading = false;
                 }
             })
-            .catch((error: any) => {
+                .catch((error: any) => {
+                debugger;
                 console.log(error);
-                if (error.response && error.response.status === 401) {
-                    this.$router.push('logon');;
-                } else {
-                    // Handle error however you want
+                if (error.response.status === 401) {
+                    this.$router.push('/logon');
                 }
             });
         }
 
     }
-
-    //mounted() {
-    //    this.getMovie();
-    //}
 }
