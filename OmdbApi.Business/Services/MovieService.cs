@@ -97,20 +97,19 @@ namespace OmdbApi.Business.Services
 
         public async Task<IEnumerable<Movie>> GetMoviesFromDb(string term, int? year)
         {
-            var result = await _uow.MovieRepository
-                .SearchBy((x => x.Title.Contains(term) ||
-                x.Actors.Contains(term) || 
-                x.Awards.Contains(term) || 
-                x.Website.Contains(term) || 
-                x.Director.Contains(term) ||
-                x.Plot.Contains(term) || 
-                x.Genre.Contains(term) ||
-                x.Production.Contains(term)), a => a.Ratings);
+            //|| x.Actors.Contains(term)  
+            //|| x.Awards.Contains(term)  
+            //|| x.Website.Contains(term)  
+            //|| x.Director.Contains(term)
+            //|| x.Plot.Contains(term)
+            //|| x.Genre.Contains(term) 
+            //|| x.Production.Contains(term)
 
-            if (year != null)
-                result = result.Where(a => a.Year.Equals(year.ToString())).ToList();
-
-            return result;
+            if(year == null)
+                return await _uow.MovieRepository.SearchBy((x => x.Title.Contains(term)));
+            
+            else
+                return await _uow.MovieRepository.SearchBy(x => x.Title.Contains(term) && x.Year.Equals(year.ToString()));
         }
 
 
