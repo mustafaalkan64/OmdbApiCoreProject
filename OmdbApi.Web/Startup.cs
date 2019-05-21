@@ -25,9 +25,10 @@ namespace OmdbApi.Web
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowOrigin",
-                    builder => builder.WithOrigins("https://localhost:5001")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()                   
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()                   
                     );
             });
             services.AddMvc();
