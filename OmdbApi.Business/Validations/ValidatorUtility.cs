@@ -8,13 +8,14 @@ namespace OmdbApi.Business.Validations
 {
     public static class ValidatorUtility
     {
-        public static void FluentValidate(IValidator validator, object entity)
+        public static string FluentValidate(IValidator validator, object entity)
         {
             var result = validator.Validate(entity);
             if (result.Errors.Count > 0)
             {
-                throw new ValidationException(result.Errors);
+                return string.Join(',',  result.Errors);
             }
+            return "";
         }
     }
 }

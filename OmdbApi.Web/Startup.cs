@@ -22,6 +22,14 @@ namespace OmdbApi.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin",
+                    builder => builder.WithOrigins("https://localhost:5001")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()                   
+                    );
+            });
             services.AddMvc();
         }
 
@@ -40,6 +48,7 @@ namespace OmdbApi.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseCors("AllowOrigin");
 
             app.UseStaticFiles();
 

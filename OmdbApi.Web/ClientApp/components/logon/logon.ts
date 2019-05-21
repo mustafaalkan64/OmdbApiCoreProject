@@ -21,14 +21,35 @@ export default class LogonComponent extends Vue {
     message: string = "";
     $router: any;
 
-    async Logon() {
-
+    Logon() {
+        debugger;
         let params = {
             username: this.userlogindto.username,
             password: this.userlogindto.password
         }
 
-        await axios.post(apiService.API_URL + '/api/user/authenticate', params)
+        //axios.defaults.baseURL = apiService.API_URL;
+        //axios.defaults.headers.get['Accepts'] = 'application/json';
+        //axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+        //axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+        //axios.defaults.withCredentials = true;
+        //axios.defaults.headers.common = {
+        //    'X-Requested-With': 'XMLHttpRequest'
+        //}
+
+        axios({
+            method: 'post',
+            url: apiService.API_URL + '/api/user/authenticate',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers': '*'
+            },
+            withCredentials: true,
+            data: params
+        })
+
         .then((response: any) => {
             if (response.data.status == true) {
                 localStorage.setItem('token', response.data.response);

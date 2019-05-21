@@ -15524,6 +15524,7 @@
       "Hangfire >= 1.7.1",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.1.1",
+      "Microsoft.AspNetCore.Cors >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.EntityFrameworkCore >= 2.1.1",
       "Microsoft.EntityFrameworkCore.Design >= 2.1.1",
@@ -15599,6 +15600,10 @@
             "autoReferenced": true
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[2.1.1, )"
+          },
+          "Microsoft.AspNetCore.Cors": {
             "target": "Package",
             "version": "[2.1.1, )"
           },

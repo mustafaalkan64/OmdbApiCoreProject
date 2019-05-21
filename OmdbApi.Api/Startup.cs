@@ -36,18 +36,32 @@ namespace OmdbApi.Api
             Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
         }
 
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:52505")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                });
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMemoryCache();
 
             //services.AddDbContext<OmdApiDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<OmdApiDbContext>(opts => opts.UseSqlServer(AppSettingsParameters.ConnectionString));
 
+
+            
             var secret = AppSettingsParameters.Secret;
             var key = Encoding.ASCII.GetBytes(secret);
             services.AddAuthentication(x =>
@@ -138,12 +152,6 @@ namespace OmdbApi.Api
             // logging
             loggerFactory.AddSerilog();
 
-            // global cors policy
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
-
             app.UseAuthentication();
 
             // HangFire Middleware
@@ -153,6 +161,12 @@ namespace OmdbApi.Api
             //// Update All Movies Per 10 Minutes..
             RecurringJob.AddOrUpdate<IMovieService>("movieService",
                 movieService => movieService.UpdateAllMovies(), "*/10 * * * *");
+
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
 
             //app.UseHttpsRedirection();
             app.UseMvc();

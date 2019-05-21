@@ -55,6 +55,7 @@ export default class MoviesComponent extends Vue {
     };
     loading: boolean = false;
     term: string = "";
+    errormessage: string = "";
     noData: boolean = false;
     $router: any;
 
@@ -100,6 +101,7 @@ export default class MoviesComponent extends Vue {
             })
             .catch((error: any) => {
                 console.log(error);
+                this.errormessage = error;
                 if (error.response.status === 401) {
                     this.$router.push('/logon');
                 }

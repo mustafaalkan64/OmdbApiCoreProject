@@ -35,7 +35,15 @@ namespace OmdbApi.Business.Services
         {
             try
             {
-                ValidatorUtility.FluentValidate(new UserLoginValidator(), userLoginDto);
+                var errors = ValidatorUtility.FluentValidate(new UserLoginValidator(), userLoginDto);
+                if(errors != "")
+                {
+                    return new WebApiResponse()
+                    {
+                        Response = errors,
+                        Status = false
+                    };
+                }
 
                 var user = await _uow.UserRepository.FindBy(x => x.Username.Equals(userLoginDto.Username) || x.Email.Equals(userLoginDto.Username));
 
